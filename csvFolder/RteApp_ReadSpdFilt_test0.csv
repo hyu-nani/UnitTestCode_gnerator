@@ -1,8 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_ReadSpdFilt_test0,""
-,<input>,g_s16RteAppSpdFilt,<expect>,returnVar,<output>,returnVar
-1,"","-1",,,,
-2,"","32767",,,,
-3,"","0",,,,
-4,"","1",,,,
-5,"","-32768",,,,

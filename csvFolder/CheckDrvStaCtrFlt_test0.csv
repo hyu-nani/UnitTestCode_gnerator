@@ -1,0 +1,29 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckDrvStaCtrFlt_test0,""
+,<input>,g_u16DrvStaCurOffsCnt,g_u16DrvStaDcVoltUndCnt,g_u16DrvStaGdrvDesatCnt,g_u16DrvStaGdrvUvOvCnt,RteApp_ReadCtrFlt,<expect>,g_u16DrvStaCurOffsCnt,g_u16DrvStaDcVoltUndCnt,g_u16DrvStaGdrvDesatCnt,g_u16DrvStaGdrvUvOvCnt,g_u32DrvStaChkFlag,<output>,g_u16DrvStaCurOffsCnt,g_u16DrvStaDcVoltUndCnt,g_u16DrvStaGdrvDesatCnt,g_u16DrvStaGdrvUvOvCnt,g_u32DrvStaChkFlag
+1,"F/F/F/F/F/F/F RteApp_ReadCtrFlt = 0x0000(0), EQV
+
+
+
+","0","0","0","0","0",,"0~60000","0~60000","0~60000","0~60000","0~16776960",,"0","0","0","0","0"
+2,"T/F/F/F/F/F/F RteApp_ReadCtrFlt = 0x001F(31), EQV
+
+","0","0","0","0","31",,"0~60000","0~60000","0~60000","0~60000","0~16776960",,"0","0","0","0","4194304"
+3,"F/T/F/F/F/F/F RteApp_ReadCtrFlt = 0x0080(128), EQV
+
+","0","0","0","0","128",,"0~60000","0~60000","0~60000","0~60000","0~16776960",,"0","0","0","0","32768"
+4,"F/F/T(T)/F/F/F/F RteApp_ReadCtrFlt = 0x0100(256), EQV
+
+","0","60000","0","0","256",,"0~60000","0~60000","0~60000","0~60000","0~16776960",,"0","60001","0","0","65536"
+5,"F/F/F/T(T)/F/F/F RteApp_ReadCtrFlt = 0x0060(96), EQV
+
+","60000","0","0","0","96",,"0~60000","0~60000","0~60000","0~60000","0~16776960",,"60001","0","0","0","2097152"
+6,"F/F/F/F/T(T)/F/F RteApp_ReadCtrFlt = 0x0600(1536), EQV
+
+","0","0","0","60000","1536",,"0~60000","0~60000","0~60000","0~60000","0~16776960",,"0","0","0","60001","1048576"
+7,"F/F/F/F/F/T(T)/F RteApp_ReadCtrFlt = 0x3800(14336), EQV
+
+","0","0","60000","0","14336",,"0~60000","0~60000","0~60000","0~60000","0~16776960",,"0","0","60001","0","524288"
+8,"F/F/F/F/F/F/T RteApp_ReadCtrFlt = 0x4000(16384), EQV
+
+","0","0","0","0","16384",,"0~60000","0~60000","0~60000","0~60000","0~16776960",,"0","0","0","0","8388608"

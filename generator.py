@@ -6,24 +6,26 @@ import xlwings as xw
 import shutil
 from datetime import date
 
-xl_file = 'VW_AQ_EOP_SWUTR_CR.xlsx'
-path = 'csvFolder/'         #csv 파일 모음폴더
-Tester   =   ''
-fileName =   ''
-TCnumber =   ''
+xl_file     =   'VW_AQ_EOP_SWUTR_CR.xlsx'
+path        =   'csvFolder/'         #csv 파일 모음폴더
+Tester      =   ''
+fileName    =   ''
+TCnumber    =   ''
 
-personal    = []
-file_list = os.listdir(path)
-csv_list    = []            #csv 파일 리스트
-testCaseID  = []            #TC ID
-note        = []            #csv 파일 내용 문자열
-functionName= []            #test 이름
-functionNum = []            #test 개수
-SWDDS       = []            #SWDDS note
-swddsCode   = []            #test의 SWDDS코드
-testName    = []
+personal    =   []
+file_list   =   os.listdir(path)
+csv_list    =   []            #csv 파일 리스트
+testCaseID  =   []            #TC ID
+note        =   []            #csv 파일 내용 문자열
+functionName=   []            #test 이름
+functionNum =   []            #test 개수
+SWDDS       =   []            #SWDDS note
+swddsCode   =   []            #test의 SWDDS코드
+testName    =   []
 
+print('파일 읽어오는중..')
 txt = open('properties.txt', 'r',encoding='utf-8-sig')
+
 for i in txt:
     personal.append(i.split(':'))
 Tester = personal[0][1].strip('\n')
@@ -35,7 +37,7 @@ else:
 TCnumber = personal[3][1].strip('\n')
 txt.close()
 
-if len(file_list)==0:
+if len(file_list) == 0:
     print("There is no file\n")
 else:
     for i in range(len(file_list)):
@@ -46,6 +48,7 @@ else:
         for j in data:
             note.append(j)
         name = note[1][0].strip('test name:').split('_test')
+        print(name)
         testName.append(name[0])
         note = []
 
@@ -76,8 +79,12 @@ else:
         for j in range(len(SWDDS)):
             if SWDDS[j].find(functionName[i]) > 0:
                 if SWDDS[j].find('SWDDS'):
+                    print(SWDDS[j])
                     data = SWDDS[j].split(' ')
-                    swddsCode.append(data[1])
+                    if data[1][0] == '[':
+                        swddsCode.append(data[1])
+                    else:
+                        swddsCode.append(str('['+data[2]+']'))
                     break
     for i in range(len(swddsCode)):
         swddsCode[i] = swddsCode[i].strip('[SWDDS.').strip(']')
@@ -100,22 +107,24 @@ else:
     Ycell = 0
     for i in range(len(functionName)):
         if functionNum[i] == 1:
-            sheet.range('C' + str(5 + Ycell)).value = str('SWDDS.' + swddsCode[i])  # SWDDS출력
-            sheet.range('B' + str(5 + Ycell)).value = str('SWUTS-F.' + swddsCode[i])  # SWUTS출력
-            sheet.range('E' + str(5 + Ycell)).value = functionName[i]  # unit 이름출력
-            sheet.range('F' + str(5 + Ycell)).value = Tester  # 테스터 출력
-            sheet.range('Z' + str(5 + Ycell)).value = date  # 날짜
+            sheet.range('C' + str(5 + Ycell)).value = str('SWDDS.' + swddsCode[i])      # SWDDS출력
+            sheet.range('B' + str(5 + Ycell)).value = str('SWUTS-F.' + swddsCode[i])    # SWUTS출력
+            sheet.range('E' + str(5 + Ycell)).value = functionName[i]                   # unit 이름출력
+            sheet.range('F' + str(5 + Ycell)).value = Tester                            # 테스터 출력
+            sheet.range('Z' + str(5 + Ycell)).value = date                              # 날짜
             Ycell = Ycell + 1
         else:
             for j in range(functionNum[i]):
-                sheet.range('C' + str(5 + Ycell)).value = str('SWDDS.' + swddsCode[i]+'_')+str(j+1)  # SWDDS출력
-                sheet.range('B' + str(5 + Ycell)).value = str('SWUTS-F.' + swddsCode[i]+'_')+str(j+1)  # SWUTS출력
-                sheet.range('E' + str(5 + Ycell)).value = functionName[i]  # unit 이름출력
-                sheet.range('F' + str(5 + Ycell)).value = Tester  # 테스터 출력
-                sheet.range('Z' + str(5 + Ycell)).value = date  # 날짜
+                sheet.range('C' + str(5 + Ycell)).value = str('SWDDS.' + swddsCode[i]+'_')+str(j+1)     # SWDDS출력
+                sheet.range('B' + str(5 + Ycell)).value = str('SWUTS-F.' + swddsCode[i]+'_')+str(j+1)   # SWUTS출력
+                sheet.range('E' + str(5 + Ycell)).value = functionName[i]                               # unit 이름출력
+                sheet.range('F' + str(5 + Ycell)).value = Tester                                        # 테스터 출력
+                sheet.range('Z' + str(5 + Ycell)).value = date                                          # 날짜
                 Ycell = Ycell + 1
     xlbook.sheets['filename.c'].name = fileName
-
+    print(functionName)
+    print(functionNum)
+    print(swddsCode)
     print("생성완료")
     xlbook.save()
     xlbook.close()
