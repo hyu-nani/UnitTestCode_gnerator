@@ -1,0 +1,11 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:ActEopCtrStateSpdChg_test2,""
+,<input>,g_f16EopCtrCurFilt,g_f16EopCtrRefSpd,g_hndEopCtrRefSpdRamp.f32RampDown,g_hndEopCtrRefSpdRamp.f32RampUp,g_hndEopCtrRefSpdRamp.f32State,g_u16EopCtrStateElapCnt,par_f32RefSpdDecRate,par_f32RefSpdIncRate,par_u16EopCtrSpdConvgTim,target_rpm,<expect>,g_eEopCtrState,g_f16EopCtrCurFilt,g_hndEopCtrRefSpdRamp.f32RampDown,g_hndEopCtrRefSpdRamp.f32RampUp,g_hndEopCtrRefSpdRamp.f32State,g_u16EopCtrStateElapCnt,<output>,g_eEopCtrState,g_f16EopCtrCurFilt,g_hndEopCtrRefSpdRamp.f32RampDown,g_hndEopCtrRefSpdRamp.f32RampUp,g_hndEopCtrRefSpdRamp.f32State,g_u16EopCtrStateElapCnt
+1,"","31","0","32","0","-2147483648","0","-1","-1","31","33",,,"","","","","",,,"","","","",""
+2,"","-32768","1","33","31","1","1","32","1","32","32767",,,"","","","","",,,"","","","",""
+3,"","0","-1","31","33","2147483647","1","31","-2147483648","1","31",,,"","","","","",,,"","","","",""
+4,"","32","33","0","32","33","65535","33","33","33","32",,,"","","","","",,,"","","","",""
+5,"","1","31","2147483647","2147483647","-1","32","-2147483648","0","0","-1",,,"","","","","",,,"","","","",""
+6,"","33","-32768","1","1","0","33","1","32","65535","1",,,"","","","","",,,"","","","",""
+7,"","-1","32767","-2147483648","-2147483648","31","31","2147483647","31","1","-32768",,,"","","","","",,,"","","","",""
+8,"","32767","32","-1","-1","32","0","0","2147483647","0","0",,,"","","","","",,,"","","","",""

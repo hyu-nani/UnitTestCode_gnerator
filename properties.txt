@@ -1,0 +1,6 @@
+Tester : Bae HyeonHan
+date :
+file_name: apRteApp.c
+Test_num: 39
+
+날짜는 없으면 현재날짜로 들어갑니다

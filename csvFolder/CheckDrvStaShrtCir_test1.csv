@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckDrvStaShrtCir_test1,""
+,<input>,current_output,g_u16DrvStaShrtCirCnt,par_f16FltShrtCirCurThrs,par_u16FltShrtCirHoldTim,<expect>,<output>
+1,"F when g_u16DrvStaShrtCirCnt = 30000, EQV","-32768","30000","0","1000",,
+2,"T when g_u16DrvStaShrtCirCnt = 30000, EQV","32767","30000","0","1000",,
