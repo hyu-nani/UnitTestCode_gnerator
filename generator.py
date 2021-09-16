@@ -48,7 +48,6 @@ else:
         for j in data:
             note.append(j)
         name = note[1][0].strip('test name:').split('_test')
-        print(name)
         testName.append(name[0])
         note = []
 
@@ -79,7 +78,6 @@ else:
         for j in range(len(SWDDS)):
             if SWDDS[j].find(functionName[i]) > 0:
                 if SWDDS[j].find('SWDDS'):
-                    print(SWDDS[j])
                     data = SWDDS[j].split(' ')
                     if data[1][0] == '[':
                         swddsCode.append(data[1])
@@ -122,9 +120,6 @@ else:
                 sheet.range('Z' + str(5 + Ycell)).value = date                                          # 날짜
                 Ycell = Ycell + 1
     xlbook.sheets['filename.c'].name = fileName
-    print(functionName)
-    print(functionNum)
-    print(swddsCode)
     print("생성완료")
     xlbook.save()
     xlbook.close()
