@@ -41,7 +41,6 @@ else:
     for i in range(len(file_list)):
         if file_list[i].find('.csv') > 0:
             csv_list.append(file_list[i].replace('.csv',''))
-    #fild_name = input("Test Name? :")
     for i in range(len(csv_list)):
         data = csv.reader(open(str(path+csv_list[i]+'.csv'),encoding='cp949'))
         for j in data:
@@ -89,13 +88,15 @@ else:
     #print(swddsCode)
 
     #엑셀자동생성
+    file_list = os.listdir()
+    for i in range(len(file_list)):
+        if file_list[i].find(xl_file.strip('.xlsx') + '_' + TCnumber + '.xlsx') != -1:
+            os.remove(xl_file.strip('.xlsx') + '_' + TCnumber + '.xlsx')
     print("빈 엑셀 생성")
-
     shutil.copy(str('resource/'+xl_file), xl_file) # 결과 출력을 위한 빈파일 생성
     os.rename(xl_file, xl_file.strip('.xlsx') + '_' + TCnumber +'.xlsx')
     xlbook = xw.Book(xl_file.strip('.xlsx') + '_' + TCnumber +'.xlsx')
     sheet = xlbook.sheets['filename.c']
-
     Ycell = 0
     for i in range(len(functionName)):
         if functionNum[i] == 1:
@@ -117,5 +118,6 @@ else:
 
     print("생성완료")
     xlbook.save()
+    xlbook.close()
     print("end")
 
