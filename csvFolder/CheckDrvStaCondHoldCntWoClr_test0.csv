@@ -1,0 +1,9 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckDrvStaCondHoldCntWoClr_test0,""
+,<input>,condition_meet,count_threshold,g_u32DrvStaChkFlag,p_checking_count_mem[0],setting_flag,<expect>,g_u32DrvStaChkFlag,<output>,g_u32DrvStaChkFlag
+1,"","0","59999","1","59999","60001",,"",,""
+2,"","1","60001","0","60000","0",,"",,""
+3,"","1","60000","60001","65535","4294967295",,"",,""
+4,"","255","65535","60000","0","60000",,"",,""
+5,"","255","1","4294967295","1","1",,"",,""
+6,"","0","0","59999","60001","59999",,"",,""

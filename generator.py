@@ -2,17 +2,20 @@
 
 import os
 import csv
+import win32com.client
 import xlwings as xw
 import shutil
 from datetime import date
+print("UnitTC report generator\n\n")
 
-xl_file     =   'VW_AQ_EOP_SWUTR_CR.xlsx'
-path        =   'csvFolder/'         #csv 파일 모음폴더
-Tester      =   ''
-fileName    =   ''
-TCnumber    =   ''
+xl_file     =   'VW_AQ_EOP_SWUTR_CR.xlsx'   #CT 빈파일
+path        =   'csvFolder/'                #csv 파일 모음폴더
+Tester      =   ''                          #테스터
+fileName    =   ''                          #파일이름
+TCnumber    =   ''                          #테스트넘버
+TCresultName=   ''                          #
 
-personal    =   []
+personal    =   []            #readme파일 읽기위한 빈통
 file_list   =   os.listdir(path)
 csv_list    =   []            #csv 파일 리스트
 testCaseID  =   []            #TC ID
@@ -21,10 +24,23 @@ functionName=   []            #test 이름
 functionNum =   []            #test 개수
 SWDDS       =   []            #SWDDS note
 swddsCode   =   []            #test의 SWDDS코드
-testName    =   []
+testName    =   []            #
+testResult  =   []            #
+
+bindata     =   []            #빈통
+
+#커버리지
+StateCoverage  =    []
+SCNPercent     =    []
+SCNTest        =    []
+SCNTotal       =    []
+BrechCoverage  =    []
+BCNPercent     =    []
+BCNTest        =    []
+BCNTotal       =    []
 
 print('파일 읽어오는중..')
-txt = open('properties.txt', 'r',encoding='utf-8-sig')
+txt = open('readme.txt', 'r',encoding='utf-8-sig')
 
 for i in txt:
     personal.append(i.split(':'))
@@ -34,7 +50,8 @@ if personal[1][1] != '\n':
     date = personal[1][1].strip('\n')
 else:
     date = str(date.today())
-TCnumber = personal[3][1].strip('\n')
+TCnumber = personal[3][1].strip('\n').strip(' ')
+TCresultName = str('test_' + personal[4][1].strip('\n').replace(' ','') + '.xlsx')
 txt.close()
 
 if len(file_list) == 0:
@@ -72,7 +89,7 @@ else:
     txt = open('resource/VW_AQ_EOP_12_SWE_Design_VW_AQ_EOP_SWDDS.txt', 'r',encoding='utf-8-sig')
     for i in txt:
         SWDDS.append(i)
-    print("내용찾는중")
+    print("SWDDS 탐색중")
     #이름에 대한 SWDDS코드 찾기
     for i in range(len(functionName)):
         for j in range(len(SWDDS)):
@@ -87,22 +104,75 @@ else:
     for i in range(len(swddsCode)):
         swddsCode[i] = swddsCode[i].strip('[SWDDS.').strip(']')
     txt.close()
-    #print("\n")
-    #print(functionName)
-    #print(functionNum)
-    #print(swddsCode)
+    print("테스트 보고서 존재유무확인")
+    file_list = os.listdir('testReport/')
+    if file_list[0] == TCresultName:
+        fileOnOff = 1
+        print("발견")
+        resultBook = xw.Book(str('testReport/'+TCresultName))
+        sheet = resultBook.sheets['Sheet0']
+        i = 1
+        data = str(sheet[str('A1')].value)
+        print("탐색중.....",end='')
+        while '함수별 커버리지' != data:
+            i = i + 1
+            data = str(sheet['A' + str(i)].value)
+            if i > 5000:
+                break
+        print('')
+        while 0 > str(sheet['B' + str(i)].value).find('총 함수 개수'):
+            i = i + 1
+            testResult.append(str(sheet['B' + str(i)].value))
+            testResult.append(str(sheet['C' + str(i)].value))
+            testResult.append(str(sheet['D' + str(i)].value))
+
+        for i in range(len(functionName)):
+            for j in range(len(testResult)):
+                if functionName[i] == testResult[j]:
+                    StateCoverage.append(testResult[j + 1])
+                    BrechCoverage.append(testResult[j + 2])
+        for i in range(len(functionName)):
+            if StateCoverage[i] != 'N/A':
+                bindata = StateCoverage[i].split('%')
+                SCNPercent.append(float(bindata[0]))
+                bindata = bindata[1].split('/')
+                SCNTest.append(float(bindata[0].strip('(')))
+                SCNTotal.append(float(bindata[1].strip(')')))
+            else:
+                SCNPercent.append('N/A')
+                SCNTest.append('N/A')
+                SCNTotal.append('N/A')
+            if BrechCoverage[i] != 'N/A':
+                bindata = BrechCoverage[i].split('%')
+                BCNPercent.append(float(bindata[0]))
+                bindata = bindata[1].split('/')
+                BCNTest.append(float(bindata[0].strip('(')))
+                BCNTotal.append(float(bindata[1].strip(')')))
+            else:
+                BCNPercent.append('N/A')
+                BCNTest.append('N/A')
+                BCNTotal.append('N/A')
+        print('완료')
+        resultBook.close()
+        excelApp1 = win32com.client.dynamic.Dispatch('Excel.Application')
+        excelApp1.Quit()
+    else:
+        fileOnOff = 0
+        print('없음')
+
 
     #엑셀자동생성
     file_list = os.listdir()
     for i in range(len(file_list)):
-        if file_list[i].find(xl_file.strip('.xlsx') + '_' + TCnumber + '.xlsx') != -1:
-            os.remove(xl_file.strip('.xlsx') + '_' + TCnumber + '.xlsx')
-    print("빈 엑셀 생성")
+        if file_list[i].find(xl_file.strip('.xlsx') + '-00' + TCnumber + '.xlsx') != -1:
+            os.remove(xl_file.strip('.xlsx') + '-00' + TCnumber + '.xlsx')
+    print("엑셀 생성")
     shutil.copy(str('resource/'+xl_file), xl_file) # 결과 출력을 위한 빈파일 생성
-    os.rename(xl_file, xl_file.strip('.xlsx') + '_' + TCnumber +'.xlsx')
-    xlbook = xw.Book(xl_file.strip('.xlsx') + '_' + TCnumber +'.xlsx')
+    os.rename(xl_file, xl_file.strip('.xlsx') + '-00' + TCnumber +'.xlsx')
+    xlbook = xw.Book(xl_file.strip('.xlsx') + '-00' + TCnumber +'.xlsx')
     sheet = xlbook.sheets['filename.c']
     Ycell = 0
+    print('출력')
     for i in range(len(functionName)):
         if functionNum[i] == 1:
             sheet.range('C' + str(5 + Ycell)).value = str('SWDDS.' + swddsCode[i])      # SWDDS출력
@@ -110,6 +180,22 @@ else:
             sheet.range('E' + str(5 + Ycell)).value = functionName[i]                   # unit 이름출력
             sheet.range('F' + str(5 + Ycell)).value = Tester                            # 테스터 출력
             sheet.range('Z' + str(5 + Ycell)).value = date                              # 날짜
+            sheet.range('D' + str(5 + Ycell)).value = fileName                          # 파일이름
+            if fileOnOff == 1:
+                if SCNPercent[i] == 'N/A':
+                    sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i])
+                else:
+                    sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i]) + '%'      # 커버리지 state %
+                sheet.range('S' + str(5 + Ycell)).value = SCNTest[i]                        # 커버리지 num test
+                sheet.range('T' + str(5 + Ycell)).value = SCNTotal[i]                       # 커버리지 num total
+                if BCNPercent[i] =='N/A':
+                    sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i])
+                else:
+                    sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i]) + '%'      # 커버리지 brench %
+                sheet.range('W' + str(5 + Ycell)).value = BCNTest[i]                        # 커버리지 num test
+                sheet.range('X' + str(5 + Ycell)).value = BCNTotal[i]                       # 커버리지 num total
+            sheet.range('Q' + str(5 + Ycell)).value = '-'                               # -
+            sheet.range('H' + str(5 + Ycell)).value = '-'                               # -
             Ycell = Ycell + 1
         else:
             for j in range(functionNum[i]):
@@ -118,10 +204,25 @@ else:
                 sheet.range('E' + str(5 + Ycell)).value = functionName[i]                               # unit 이름출력
                 sheet.range('F' + str(5 + Ycell)).value = Tester                                        # 테스터 출력
                 sheet.range('Z' + str(5 + Ycell)).value = date                                          # 날짜
+                sheet.range('D' + str(5 + Ycell)).value = fileName                                      # 파일이름
+                if fileOnOff == 1:
+                    if SCNPercent[i] == 'N/A':
+                        sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i])
+                    else:
+                        sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i]) + '%'                  # 커버리지 state %
+                    sheet.range('S' + str(5 + Ycell)).value = SCNTest[i]                                    # 커버리지 num test
+                    sheet.range('T' + str(5 + Ycell)).value = SCNTotal[i]                                   # 커버리지 num total
+                    if BCNPercent[i] == 'N/A':
+                        sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i])
+                    else:
+                        sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i]) + '%'                  # 커버리지 brench %
+                    sheet.range('W' + str(5 + Ycell)).value = BCNTest[i]                                    # 커버리지 num test
+                    sheet.range('X' + str(5 + Ycell)).value = BCNTotal[i]                                   # 커버리지 num total
+                sheet.range('Q' + str(5 + Ycell)).value = '-'                                               # -
+                sheet.range('H' + str(5 + Ycell)).value = '-'                                               # -
                 Ycell = Ycell + 1
     xlbook.sheets['filename.c'].name = fileName
     print("생성완료")
     xlbook.save()
-    xlbook.close()
-    print("end")
+    print("END")
 

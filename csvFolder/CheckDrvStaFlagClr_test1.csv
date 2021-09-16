@@ -1,0 +1,8 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckDrvStaFlagClr_test1,""
+,<input>,par_s16RefSpdOffThrs,<expect>,<output>
+1,"","-1",,
+2,"","1",,
+3,"","-32768",,
+4,"","0",,
+5,"","32767",,
