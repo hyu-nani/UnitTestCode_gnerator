@@ -1,0 +1,9 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CanMsg_Init_test0,""
+,<input>,g_au8CanMsgReqRxData[0],g_au8CanMsgResTxData[0],<expect>,g_au8CanMsgReqRxData[0],g_au8CanMsgResTxData[0],g_bCanMsgUpdated,g_u16CanMsgRxDataNo,g_u16CanMsgRxTimeStamp,<output>,g_au8CanMsgReqRxData[0],g_au8CanMsgResTxData[0],g_bCanMsgUpdated,g_u16CanMsgRxDataNo,g_u16CanMsgRxTimeStamp
+1,"","255","255",,"","",,,,,"","",,,
+2,"","1","1",,"","",,,,,"","",,,
+3,"","7","0",,"","",,,,,"","",,,
+4,"","8","9",,"","",,,,,"","",,,
+5,"","9","8",,"","",,,,,"","",,,
+6,"","0","7",,"","",,,,,"","",,,

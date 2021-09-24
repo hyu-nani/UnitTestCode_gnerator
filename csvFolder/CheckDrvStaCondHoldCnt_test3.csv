@@ -1,9 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CheckDrvStaCondHoldCnt_test3,""
-,<input>,condition_meet,count_threshold,g_u32DrvStaChkFlag,p_checking_count_mem[0],setting_flag,<expect>,g_u32DrvStaChkFlag,<output>,g_u32DrvStaChkFlag
-1,"","TRUE(1)","65535","1","59999","0",,"",,""
-2,"","FALSE(0)","1","0","60001","60001",,"",,""
-3,"","FALSE(0)","60001","59999","60000","4294967295",,"",,""
-4,"","FALSE(0)","59999","60000","1","60000",,"",,""
-5,"","TRUE(1)","0","60001","0","1",,"",,""
-6,"","TRUE(1)","60000","4294967295","65535","59999",,"",,""

@@ -1,8 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CheckDrvStaLowCur_test2,""
-,<input>,current_output,g_u16DrvStaLowCurCnt,par_f16FltLowCurCurThrs,par_u16FltLowCurHoldTim,<expect>,<output>
-1,"","-32768","1","1","1",,
-2,"","32767","1","0","0",,
-3,"","-1","0","-32768","0",,
-4,"","0","0","32767","65535",,
-5,"","1","65535","-1","1",,

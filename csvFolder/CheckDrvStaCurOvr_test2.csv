@@ -1,8 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CheckDrvStaCurOvr_test2,""
-,<input>,current_output,g_u16DrvStaCurOvrCnt1,g_u16DrvStaCurOvrCnt3,g_u16DrvStaCurOvrCnt21,g_u16DrvStaCurOvrCnt22,motor_speed,par_bEopCtrCurLmtEna,par_f16FltCurOvrCurThrs1,par_f16FltCurOvrCurThrs2,par_f16FltCurOvrCurThrs3,par_f16FltCurOvrSpdThrs1,par_u16FltCurOvrAkHoldTim2,par_u16FltCurOvrCkHoldTim2,par_u16FltCurOvrHoldTim1,par_u16FltCurOvrHoldTim3,<expect>,<output>
-1,"","-1","1","65535","1","1","-1","FALSE(0)","32767","32767","32767","1","1","1","1","0",,
-2,"","-32768","65535","1","1","0","32767","TRUE(1)","-1","-32768","-1","0","0","0","0","65535",,
-3,"","0","1","0","0","1","1","FALSE(0)","1","-1","-32768","32767","65535","0","1","0",,
-4,"","32767","0","1","65535","65535","0","TRUE(1)","0","1","0","-1","1","1","65535","1",,
-5,"","1","0","0","0","0","-32768","FALSE(0)","-32768","0","1","-32768","0","65535","0","1",,
