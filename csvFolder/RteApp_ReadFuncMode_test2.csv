@@ -1,6 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_ReadFuncMode_test2,""
-,<input>,g_eRteAppFuncMode,<expect>,returnVar,<output>,returnVar
-1,"","FUNC_MODE_NONE(0)",,,,
-2,"","FUNC_MODE_PARTIAL(1)",,,,
-3,"","FUNC_MODE_FULL(2)",,,,

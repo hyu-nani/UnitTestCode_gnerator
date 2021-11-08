@@ -70,12 +70,12 @@ file_list   =   os.listdir(CSVpath)
 if len(file_list) == 0:
     print("There is no file\n")
 else:
-    for i in file_list:
+    for i in file_list:                 #CSV 파일 이름 출력
         print(i)
-    for i in range(len(file_list)):
+    for i in range(len(file_list)):     #CSV 파일 확장자 제거
         if file_list[i].find('.csv') > 0:
             csv_list.append(file_list[i].replace('.csv',''))
-    for i in range(len(csv_list)):
+    for i in range(len(csv_list)):      #CSV 파일 열고 테스트 이름 가져오기
         data = csv.reader(open(str(CSVpath+csv_list[i]+'.csv'),encoding='cp949'))
         for j in data:
             note.append(j)
@@ -85,8 +85,7 @@ else:
 
     name = testName[0]
     countNum = 1
-    #테스트 개수파악
-    for i in range(1,len(testName)+1):
+    for i in range(1,len(testName)+1):  #각각의 테스트의 갯수 파악
         if i == len(testName):
             functionName.append(name)
             functionNum.append(countNum)
@@ -99,26 +98,20 @@ else:
             name = testName[i]
             countNum = 1
     print(str(len(testName))+'개의 파일 발견')
-    #파일 읽기
-    print("SWDDS 파일내용수집")
-    txt = open('resource/VW_AQ_EOP_12_SWE_Design_VW_AQ_EOP_SWDDS.txt', 'r',encoding='utf-8-sig')
-    for i in txt:
-        SWDDS.append(i)
-    print("SWDDS 탐색중")
+    file_list = os.listdir(str('testReport/' + projectName + '/Test_Result/'))
+    for i in testName:
+        for j in file_list:
+            name = j.split('_test')
+            if name[0] == i:
+                print(name[0])
+                sheet = xw.Book('testReport/' + projectName + '/Test_Result/'+str(name[0] + '_test0.xls')).sheets['Report']
+                #sheet = xlbook.sheets['Report']
+                data = sheet.range('A2').value
+                print(data)
+
+    input()
     #이름에 대한 SWDDS코드 찾기
-    for i in range(len(functionName)):
-        for j in range(len(SWDDS)):
-            if SWDDS[j].find(functionName[i]) > 0:
-                if SWDDS[j].find('SWDDS'):
-                    data = SWDDS[j].split(' ')
-                    if data[1][0] == '[':
-                        swddsCode.append(data[1])
-                    else:
-                        swddsCode.append(str('['+data[2]+']'))
-                    break
-    for i in range(len(swddsCode)):
-        swddsCode[i] = swddsCode[i].strip('[SWDDS.').strip(']')
-    txt.close()
+
     print("테스트 보고서 유무확인")
     file_list = os.listdir(str('testReport/'+projectName+'/'))
     if len(file_list) > 0:

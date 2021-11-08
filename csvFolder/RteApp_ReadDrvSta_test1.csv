@@ -1,6 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_ReadDrvSta_test1,""
-,<input>,g_u32RteAppDrvSta,<expect>,returnVar,<output>,returnVar
-1,"","4294967295",,,,
-2,"","0",,,,
-3,"","1",,,,

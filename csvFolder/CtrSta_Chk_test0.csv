@@ -1,0 +1,4 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CtrSta_Chk_test0,""
+,<input>,<expect>,<output>
+1,"Create the test case to check statement coverage( or branch coverage).",,

@@ -1,8 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_ReadDcVolt_test1,""
-,<input>,g_f16RteAppDcVolt,<expect>,returnVar,<output>,returnVar
-1,"","1",,,,
-2,"","32767",,,,
-3,"","-1",,,,
-4,"","0",,,,
-5,"","-32768",,,,
