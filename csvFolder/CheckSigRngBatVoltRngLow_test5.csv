@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckSigRngBatVoltRngLow_test5,""
+,<input>,battery_voltage,g_u16SigRngBatVoltLowCntClr,g_u16SigRngBatVoltLowCntSet,g_u32SigRngChkFlag,par_f16FltBatVoltLowClrThrs,par_f16FltBatVoltLowSetThrs,par_u16FltBatVoltLowClrTim,par_u16FltBatVoltLowSetTim,<expect>,g_u16SigRngBatVoltLowCntClr,g_u16SigRngBatVoltLowCntSet,<output>,g_u16SigRngBatVoltLowCntClr,g_u16SigRngBatVoltLowCntSet
+1,"Set the value(g_u16SigRngBatVoltLowCntClr) to verify boundary of conditional statement(max+1) of line 411","16383","60001","0","122","6664","6220","1000","1000",,"0~60000","0~60000",,"60000","0"
+2,"Set the value(g_u16SigRngBatVoltLowCntSet) to verify boundary of conditional statement(max+1) of line 416","16383","0","60001","122","6664","6220","1000","1000",,"0~60000","0~60000",,"20","0"

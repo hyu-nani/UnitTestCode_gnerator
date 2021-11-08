@@ -6,7 +6,7 @@ import win32com.client
 import xlwings as xw
 import shutil
 from datetime import date
-
+import time
 
 print("\n┌───────────────────────────────────────────┐")
 print("│         Unit TC report generator          │")
@@ -18,7 +18,7 @@ print("readme.txt 를 수정하시면 세부사항을 기입할 수 있습니다
 input("진행할려면 엔터를 눌러주세요...\n\n")
 print("FLOWINUS.")
 
-xl_file     =   'VW_AQ_EOP_SWUTR_CR.xlsx'   #CT 빈파일
+xl_file     =   'Report.xlsx'   #CT 빈파일
 CSVpath     =   'csvFolder/'                #csv 파일 모음폴더
 Tester      =   ''                          #테스터
 fileName    =   ''                          #파일이름
@@ -28,12 +28,12 @@ TCresultName=   ''                          #
 personal    =   []            #readme파일 읽기위한 빈통
 file_list   =   os.listdir('testReport/')
 csv_list    =   []            #csv 파일 리스트
-testCaseID  =   []            #TC ID
 note        =   []            #csv 파일 내용 문자열
 functionName=   []            #test 이름
 functionNum =   []            #test 개수
-SWDDS       =   []            #SWDDS note
 swddsCode   =   []            #test의 SWDDS코드
+functionFileName = []         #테스트의 파일위치
+testCaseNum =   []            #테스트케이스의 갯수
 testName    =   []            #
 testResult  =   []            #
 
@@ -83,9 +83,10 @@ else:
         testName.append(name[0])
         note = []
 
+    # 각각의 테스트의 갯수 파악
     name = testName[0]
     countNum = 1
-    for i in range(1,len(testName)+1):  #각각의 테스트의 갯수 파악
+    for i in range(1,len(testName)+1):
         if i == len(testName):
             functionName.append(name)
             functionNum.append(countNum)
@@ -97,20 +98,49 @@ else:
             functionNum.append(countNum)
             name = testName[i]
             countNum = 1
+    print('테스트 이름:\t',end='')
+    print(functionName)
+    print('각 테스트당 갯수:\t',end='')
+    print(functionNum)
     print(str(len(testName))+'개의 파일 발견')
+
+    # 보고서 파일들에서 SWDDS 코드 읽어오기
     file_list = os.listdir(str('testReport/' + projectName + '/Test_Result/'))
-    for i in testName:
+    print(functionName)
+    for i in range(len(functionName)):
+        num = 0
         for j in file_list:
             name = j.split('_test')
-            if name[0] == i:
-                print(name[0])
-                sheet = xw.Book('testReport/' + projectName + '/Test_Result/'+str(name[0] + '_test0.xls')).sheets['Report']
-                #sheet = xlbook.sheets['Report']
-                data = sheet.range('A2').value
-                print(data)
+            if name[0] == functionName[i]:
+                while name[1] != str(num)+'.xls':
+                    num = num + 1
+                    if num > 50:
+                        break
+                print(str('testReport/' + projectName + '/Test_Result/'+ name[0] + '_test'+str(num)+'.xls'))
+                book = xw.Book('testReport/' +str(projectName) + '/Test_Result/' + str(name[0])+ '_test'+str(num)+'.xls')
+                sheet = xw.sheets['Report']
+                testCaseNum.append(int(sheet.range('A11').value))
+                text = sheet.range('A1').value
+                text = text.strip("테스트 보고서 'SWUTS-F.").strip("'").split("_")
+                swddsCode.append(text[0])
+                book.app.quit()
+                time.sleep(0.5)
+                A = num
+                num = num + 1
+                while num < functionNum[i]+A:
+                    print(str('testReport/' + projectName + '/Test_Result/' + name[0] + '_test' + str(num) + '.xls'))
+                    book = xw.Book('testReport/' + str(projectName) + '/Test_Result/' + str(name[0]) + '_test' + str(num) + '.xls')
+                    sheet = xw.sheets['Report']
+                    testCaseNum.append(int(sheet.range('A11').value))
+                    book.app.quit()
+                    time.sleep(0.5)
+                    num = num + 1
+                break
+    print('SWDDS code:\t',end='')
+    print(swddsCode)
+    print(testCaseNum)
 
-    input()
-    #이름에 대한 SWDDS코드 찾기
+    #이름에 대한 커버리지 찾기
 
     print("테스트 보고서 유무확인")
     file_list = os.listdir(str('testReport/'+projectName+'/'))
@@ -125,7 +155,6 @@ else:
                 data = str(sheet[str('A1')].value)
                 print("탐색중.....",end='')
                 while '함수별 커버리지' != data:
-
                     i = i + 1
                     data = str(sheet['A' + str(i)].value)
                     if i > 5000:
@@ -135,6 +164,7 @@ else:
                 print('')
                 while 0 > str(sheet['B' + str(i)].value).find('총 함수 개수'):
                     i = i + 1
+                    testResult.append(str(sheet['A' + str(i)].value))
                     testResult.append(str(sheet['B' + str(i)].value))
                     testResult.append(str(sheet['C' + str(i)].value))
                     testResult.append(str(sheet['D' + str(i)].value))
@@ -142,6 +172,9 @@ else:
                 for i in range(len(functionName)):
                     for j in range(len(testResult)):
                         if functionName[i] == testResult[j]:
+                            text = testResult[j - 1]
+                            text = text.split('\\')
+                            functionFileName.append(text[len(text)-1])
                             StateCoverage.append(testResult[j + 1])
                             BrechCoverage.append(testResult[j + 2])
                 for i in range(len(functionName)):
@@ -166,24 +199,22 @@ else:
                         BCNTest.append('N/A')
                         BCNTotal.append('N/A')
                 print('완료')
-                #resultBook.close()
                 resultBook.app.quit()
             else:
                 fileOnOff = 0
-                print("매칭에러")
     else:
         fileOnOff = 0
-        print('파일없음')
-
+        print('커버리지 보고서 파일없음')
+        input()
     #엑셀자동생성
-    file_list = os.listdir()
-    for i in range(len(file_list)):
-        if file_list[i].find(xl_file.strip('.xlsx') + '-00' + TCnumber + '.xlsx') != -1:
-            os.remove(xl_file.strip('.xlsx') + '-00' + TCnumber + '.xlsx')
+    file_list = os.listdir('Result/')
+    for i in file_list:
+        if i == xl_file:
+            os.remove(str('Result/' + xl_file))
     print("엑셀 생성")
-    shutil.copy(str('resource/'+xl_file), xl_file) # 결과 출력을 위한 빈파일 생성
-    os.rename(xl_file, xl_file.strip('.xlsx') + '-00' + TCnumber +'.xlsx')
-    xlbook = xw.Book(xl_file.strip('.xlsx') + '-00' + TCnumber +'.xlsx')
+    shutil.copy(str('source/'+ xl_file), str('Result/' + xl_file)) # 결과 출력을 위한 빈파일 생성
+    os.rename(str('Result/' + xl_file), str('Result/' + xl_file))
+    xlbook = xw.Book(str('Result/' + xl_file))
     print('출력',end='')
     sheet = xlbook.sheets['filename.c']
     Ycell = 0
@@ -194,7 +225,8 @@ else:
             sheet.range('E' + str(5 + Ycell)).value = functionName[i]                   # unit 이름출력
             sheet.range('F' + str(5 + Ycell)).value = Tester                            # 테스터 출력
             sheet.range('Z' + str(5 + Ycell)).value = date                              # 날짜
-            sheet.range('D' + str(5 + Ycell)).value = fileName                          # 파일이름
+            sheet.range('D' + str(5 + Ycell)).value = functionFileName[i]               # 파일이름
+            sheet.range('Q' + str(5 + Ycell)).value = testCaseNum[Ycell]                # 테스트케이스 갯수
             if fileOnOff == 1:
                 if SCNPercent[i] == 'N/A':
                     sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i])
@@ -208,18 +240,18 @@ else:
                     sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i]) + '%'      # 커버리지 brench %
                 sheet.range('W' + str(5 + Ycell)).value = BCNTest[i]                        # 커버리지 num test
                 sheet.range('X' + str(5 + Ycell)).value = BCNTotal[i]                       # 커버리지 num total
-            sheet.range('Q' + str(5 + Ycell)).value = '-'                               # -
-            sheet.range('H' + str(5 + Ycell)).value = '-'                               # -
+            sheet.range('H' + str(5 + Ycell)).value = '-'                                   # -
             Ycell = Ycell + 1
             print('.',end='')
         else:
-            for j in range(functionNum[i]):
+            for j in range(int(functionNum[i])):
                 sheet.range('C' + str(5 + Ycell)).value = str('SWDDS.' + swddsCode[i]+'_')+str(j+1)     # SWDDS출력
                 sheet.range('B' + str(5 + Ycell)).value = str('SWUTS-F.' + swddsCode[i]+'_')+str(j+1)   # SWUTS출력
                 sheet.range('E' + str(5 + Ycell)).value = functionName[i]                               # unit 이름출력
                 sheet.range('F' + str(5 + Ycell)).value = Tester                                        # 테스터 출력
                 sheet.range('Z' + str(5 + Ycell)).value = date                                          # 날짜
-                sheet.range('D' + str(5 + Ycell)).value = fileName                                      # 파일이름
+                sheet.range('D' + str(5 + Ycell)).value = functionFileName[i]                           # 파일이름
+                sheet.range('Q' + str(5 + Ycell)).value = testCaseNum[Ycell]                            # 테스트케이스 갯수
                 if fileOnOff == 1:
                     if SCNPercent[i] == 'N/A':
                         sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i])
@@ -233,7 +265,6 @@ else:
                         sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i]) + '%'                  # 커버리지 brench %
                     sheet.range('W' + str(5 + Ycell)).value = BCNTest[i]                                    # 커버리지 num test
                     sheet.range('X' + str(5 + Ycell)).value = BCNTotal[i]                                   # 커버리지 num total
-                sheet.range('Q' + str(5 + Ycell)).value = '-'                                               # -
                 sheet.range('H' + str(5 + Ycell)).value = '-'                                               # -
                 Ycell = Ycell + 1
                 print('.', end='')
@@ -242,35 +273,25 @@ else:
     print("생성완료")
     xlbook.save()
     xlbook.app.quit()
-    char = input("Test Result내 파일 명을 변경하시겠습니까? y/n :")
-    if char == 'y':
-        file_list = os.listdir(str('testReport/'+projectName+'/Test_Result/'))
-        print("기존파일제거")
-        for i in range(len(file_list)):
-            if file_list[i].find('SWUTS') >= 0:
-                os.remove(str('testReport/'+projectName+'/Test_Result/'+ file_list[i]))
-                print('remove:'+file_list[i])
-        print("Test Result 파일명 변경중.",end='')
-        file_list = os.listdir(str('testReport/'+projectName+'/Test_Result/'))
-        for i in range(len(functionName)):
-            for j in range(len(file_list)):
-                for k in range(int(functionNum[i])):
-                    if file_list[j] == str(functionName[i]+'_test'+str(k)+'.xls'):
-                        print('.', end='')
-                        if functionNum[i] == 1:
-                            os.rename(str('testReport/'+projectName+'/Test_Result/'+functionName[i]+'_test'+str(k)+'.xls'),str('testReport/'+projectName+'/Test_Result/SWUTS-F.'+swddsCode[i]+'.xls'))
-                        else:
-                            os.rename(str('testReport/'+projectName+'/Test_Result/' + functionName[i] + '_test' + str(k) + '.xls'),str('testReport/'+projectName+'/Test_Result/SWUTS-F.' + swddsCode[i] + '_' + str(k + 1) + '.xls'))
-        print()
-        char = input("이름이 변경되지 않은 파일을 제거하시겠습니까? y/n :");
-        if char == 'y':
-            file_list = os.listdir('testReport/'+projectName+'/Test_Result/')
-            print("제거중.")
-            for i in range(len(file_list)):
-                if file_list[i].find('SWUTS') < 0:
-                    os.remove('testReport/'+projectName+'/Test_Result/'+file_list[i])
-                    print("remove:"+file_list[i])
+    file_list = os.listdir(str('testReport/'+projectName+'/Test_Result/'))
+    print("Test Result xl 파일 가져오는 중.")
+    for i in range(len(functionName)):
+        k = 0
+        p = 0
+        while k < int(functionNum[i]):
+            for j in file_list:
+                if j == str(functionName[i] + '_test' + str(k+p) + '.xls'):
+                    if int(functionNum[i]) == 1:
+                        shutil.copy(str('testReport/' + projectName + '/Test_Result/' + functionName[i] + '_test' + str(k+p) + '.xls'), str('Result/SWUTS-F.' + swddsCode[i] + '.xls'))
+                        print('copy: ' + functionName[i] + '_test' + str(k+p) + '.xls   \t\t-->\t SWUTS-F.' + swddsCode[
+                            i] + '.xls')
+                    else:
+                        shutil.copy(str('testReport/' + projectName + '/Test_Result/' + functionName[i] + '_test' + str(k+p) + '.xls'), str('Result/SWUTS-F.' + swddsCode[i] + '_'+str(k+1)+'.xls'))
+                        print('copy: ' + functionName[i] + '_test' + str(k+p) + '.xls   \t\t-->\t SWUTS-F.' + swddsCode[
+                            i] + '_' + str(k + 1) + '.xls')
+                    k = k + 1
+            p = p + 1
     print("완료")
 
-input('끝. 엔터를 눌러주세요.')
+input('작업끝.  엔터를 눌러주세요.')
 
