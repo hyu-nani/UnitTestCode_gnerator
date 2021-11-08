@@ -216,59 +216,60 @@ else:
     os.rename(str('Result/' + xl_file), str('Result/' + xl_file))
     xlbook = xw.Book(str('Result/' + xl_file))
     print('출력',end='')
-    sheet = xlbook.sheets['filename.c']
+    sheet = xlbook.sheets['Unit_TC']
     Ycell = 0
+    xlStartNum = 13
     for i in range(len(functionName)):
         if functionNum[i] == 1:
-            sheet.range('C' + str(5 + Ycell)).value = str('SWDDS.' + swddsCode[i])      # SWDDS출력
-            sheet.range('B' + str(5 + Ycell)).value = str('SWUTS-F.' + swddsCode[i])    # SWUTS출력
-            sheet.range('E' + str(5 + Ycell)).value = functionName[i]                   # unit 이름출력
-            sheet.range('F' + str(5 + Ycell)).value = Tester                            # 테스터 출력
-            sheet.range('Z' + str(5 + Ycell)).value = date                              # 날짜
-            sheet.range('D' + str(5 + Ycell)).value = functionFileName[i]               # 파일이름
-            sheet.range('Q' + str(5 + Ycell)).value = testCaseNum[Ycell]                # 테스트케이스 갯수
+            sheet.range('C' + str(xlStartNum + Ycell)).value = str('SWDDS.' + swddsCode[i])      # SWDDS출력
+            sheet.range('B' + str(xlStartNum + Ycell)).value = str('SWUTS-F.' + swddsCode[i])    # SWUTS출력
+            sheet.range('E' + str(xlStartNum + Ycell)).value = functionName[i]                   # unit 이름출력
+            sheet.range('F' + str(xlStartNum + Ycell)).value = Tester                            # 테스터 출력
+            sheet.range('Z' + str(xlStartNum + Ycell)).value = date                              # 날짜
+            sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]               # 파일이름
+            sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                # 테스트케이스 갯수
             if fileOnOff == 1:
                 if SCNPercent[i] == 'N/A':
-                    sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i])
+                    sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i])
                 else:
-                    sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i]) + '%'      # 커버리지 state %
-                sheet.range('S' + str(5 + Ycell)).value = SCNTest[i]                        # 커버리지 num test
-                sheet.range('T' + str(5 + Ycell)).value = SCNTotal[i]                       # 커버리지 num total
+                    sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i]) + '%'      # 커버리지 state %
+                sheet.range('S' + str(xlStartNum + Ycell)).value = SCNTest[i]                        # 커버리지 num test
+                sheet.range('T' + str(xlStartNum + Ycell)).value = SCNTotal[i]                       # 커버리지 num total
                 if BCNPercent[i] =='N/A':
-                    sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i])
+                    sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i])
                 else:
-                    sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i]) + '%'      # 커버리지 brench %
-                sheet.range('W' + str(5 + Ycell)).value = BCNTest[i]                        # 커버리지 num test
-                sheet.range('X' + str(5 + Ycell)).value = BCNTotal[i]                       # 커버리지 num total
-            sheet.range('H' + str(5 + Ycell)).value = '-'                                   # -
+                    sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i]) + '%'      # 커버리지 brench %
+                sheet.range('W' + str(xlStartNum + Ycell)).value = BCNTest[i]                        # 커버리지 num test
+                sheet.range('X' + str(xlStartNum + Ycell)).value = BCNTotal[i]                       # 커버리지 num total
+            sheet.range('H' + str(xlStartNum + Ycell)).value = '-'                                   # -
             Ycell = Ycell + 1
             print('.',end='')
         else:
             for j in range(int(functionNum[i])):
-                sheet.range('C' + str(5 + Ycell)).value = str('SWDDS.' + swddsCode[i]+'_')+str(j+1)     # SWDDS출력
-                sheet.range('B' + str(5 + Ycell)).value = str('SWUTS-F.' + swddsCode[i]+'_')+str(j+1)   # SWUTS출력
-                sheet.range('E' + str(5 + Ycell)).value = functionName[i]                               # unit 이름출력
-                sheet.range('F' + str(5 + Ycell)).value = Tester                                        # 테스터 출력
-                sheet.range('Z' + str(5 + Ycell)).value = date                                          # 날짜
-                sheet.range('D' + str(5 + Ycell)).value = functionFileName[i]                           # 파일이름
-                sheet.range('Q' + str(5 + Ycell)).value = testCaseNum[Ycell]                            # 테스트케이스 갯수
+                sheet.range('C' + str(xlStartNum + Ycell)).value = str('SWDDS.' + swddsCode[i]+'_')+str(j+1)     # SWDDS출력
+                sheet.range('B' + str(xlStartNum + Ycell)).value = str('SWUTS-F.' + swddsCode[i]+'_')+str(j+1)   # SWUTS출력
+                sheet.range('E' + str(xlStartNum + Ycell)).value = functionName[i]                               # unit 이름출력
+                sheet.range('F' + str(xlStartNum + Ycell)).value = Tester                                        # 테스터 출력
+                sheet.range('Z' + str(xlStartNum + Ycell)).value = date                                          # 날짜
+                sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]                           # 파일이름
+                sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                            # 테스트케이스 갯수
                 if fileOnOff == 1:
                     if SCNPercent[i] == 'N/A':
-                        sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i])
+                        sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i])
                     else:
-                        sheet.range('R' + str(5 + Ycell)).value = str(SCNPercent[i]) + '%'                  # 커버리지 state %
-                    sheet.range('S' + str(5 + Ycell)).value = SCNTest[i]                                    # 커버리지 num test
-                    sheet.range('T' + str(5 + Ycell)).value = SCNTotal[i]                                   # 커버리지 num total
+                        sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i]) + '%'                  # 커버리지 state %
+                    sheet.range('S' + str(xlStartNum + Ycell)).value = SCNTest[i]                                    # 커버리지 num test
+                    sheet.range('T' + str(xlStartNum + Ycell)).value = SCNTotal[i]                                   # 커버리지 num total
                     if BCNPercent[i] == 'N/A':
-                        sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i])
+                        sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i])
                     else:
-                        sheet.range('V' + str(5 + Ycell)).value = str(BCNPercent[i]) + '%'                  # 커버리지 brench %
-                    sheet.range('W' + str(5 + Ycell)).value = BCNTest[i]                                    # 커버리지 num test
-                    sheet.range('X' + str(5 + Ycell)).value = BCNTotal[i]                                   # 커버리지 num total
-                sheet.range('H' + str(5 + Ycell)).value = '-'                                               # -
+                        sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i]) + '%'                  # 커버리지 brench %
+                    sheet.range('W' + str(xlStartNum + Ycell)).value = BCNTest[i]                                    # 커버리지 num test
+                    sheet.range('X' + str(xlStartNum + Ycell)).value = BCNTotal[i]                                   # 커버리지 num total
+                sheet.range('H' + str(xlStartNum + Ycell)).value = '-'                                               # -
                 Ycell = Ycell + 1
                 print('.', end='')
-    xlbook.sheets['filename.c'].name = fileName
+    #xlbook.sheets['Unit_TC'].name = fileName
     print()
     print("생성완료")
     xlbook.save()
