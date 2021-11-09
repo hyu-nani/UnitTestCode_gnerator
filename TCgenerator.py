@@ -32,10 +32,12 @@ note        =   []            #csv 파일 내용 문자열
 functionName=   []            #test 이름
 functionNum =   []            #test 개수
 swddsCode   =   []            #test의 SWDDS코드
-functionFileName = []         #테스트의 파일위치
-testCaseNum =   []            #테스트케이스의 갯수
+functionFileName    =   []    #테스트의 파일위치
+testCaseNum         =   []    #테스트케이스의 갯수
 testName    =   []            #
 testResult  =   []            #
+
+caseExplain =   []            #각 테스트당 설명저장
 
 bindata     =   []            #빈통
 
@@ -58,12 +60,10 @@ projectName = file_list[0]
 for i in txt:
     personal.append(i.split(':'))
 Tester = personal[0][1].strip('\n')
-fileName = personal[2][1].strip('\n')
 if personal[1][1] != '\n':
     date = personal[1][1].strip('\n')
 else:
     date = str(date.today())
-TCnumber = personal[3][1].strip('\n').strip(' ')
 txt.close()
 
 file_list   =   os.listdir(CSVpath)
@@ -75,6 +75,7 @@ else:
     for i in range(len(file_list)):     #CSV 파일 확장자 제거
         if file_list[i].find('.csv') > 0:
             csv_list.append(file_list[i].replace('.csv',''))
+            caseExplain.append("")     #설명 리스트 늘리기
     for i in range(len(csv_list)):      #CSV 파일 열고 테스트 이름 가져오기
         data = csv.reader(open(str(CSVpath+csv_list[i]+'.csv'),encoding='cp949'))
         for j in data:
@@ -107,6 +108,7 @@ else:
     # 보고서 파일들에서 SWDDS 코드 읽어오기
     file_list = os.listdir(str('testReport/' + projectName + '/Test_Result/'))
     print(functionName)
+    count=0
     for i in range(len(functionName)):
         num = 0
         for j in file_list:
@@ -117,14 +119,21 @@ else:
                     if num > 50:
                         break
                 print(str('testReport/' + projectName + '/Test_Result/'+ name[0] + '_test'+str(num)+'.xls'))
-                book = xw.Book('testReport/' +str(projectName) + '/Test_Result/' + str(name[0])+ '_test'+str(num)+'.xls')
+                book = xw.Book('testReport/' +projectName + '/Test_Result/' + name[0] + '_test'+str(num)+'.xls')
                 sheet = xw.sheets['Report']
                 testCaseNum.append(int(sheet.range('A11').value))
                 text = sheet.range('A1').value
                 text = text.strip("테스트 보고서 'SWUTS-F.").strip("'").split("_")
                 swddsCode.append(text[0])
+                for m in range(1,1000):
+                    text1 = sheet.range('A'+str(m)).value
+                    if text1 == '번호':
+                        num1 = sheet.range('A'+ str(m+1)).value
+                        explaintext = sheet.range('C'+ str(m+1)).value
+                        caseExplain[count] = str(caseExplain[count] + num1 + '. ' + explaintext + ' \n')
                 book.app.quit()
-                time.sleep(0.5)
+                time.sleep(0.4)
+                count = count + 1
                 A = num
                 num = num + 1
                 while num < functionNum[i]+A:
@@ -132,9 +141,17 @@ else:
                     book = xw.Book('testReport/' + str(projectName) + '/Test_Result/' + str(name[0]) + '_test' + str(num) + '.xls')
                     sheet = xw.sheets['Report']
                     testCaseNum.append(int(sheet.range('A11').value))
+                    caseExplain.append('')
+                    for m in range(1, 1000):
+                        text1 = sheet.range('A' + str(m)).value
+                        if text1 == '번호':
+                            num1 = sheet.range('A' + str(m + 1)).value
+                            explaintext = sheet.range('C' + str(m + 1)).value
+                            caseExplain[count] = str(caseExplain[count] + num1 + '. ' + explaintext + ' \n')
                     book.app.quit()
-                    time.sleep(0.5)
+                    time.sleep(0.4)
                     num = num + 1
+                    count = count + 1
                 break
     print('SWDDS code:\t',end='')
     print(swddsCode)
@@ -228,6 +245,8 @@ else:
             sheet.range('Z' + str(xlStartNum + Ycell)).value = date                              # 날짜
             sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]               # 파일이름
             sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                # 테스트케이스 갯수
+            sheet.range('L' + str(xlStartNum + Ycell)).value = caseExplain[Ycell]                # 테스트케이스 설명
+            sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F."+swddsCode[i]+"\nGoal : ")
             if fileOnOff == 1:
                 if SCNPercent[i] == 'N/A':
                     sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i])
@@ -241,7 +260,6 @@ else:
                     sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i]) + '%'      # 커버리지 brench %
                 sheet.range('W' + str(xlStartNum + Ycell)).value = BCNTest[i]                        # 커버리지 num test
                 sheet.range('X' + str(xlStartNum + Ycell)).value = BCNTotal[i]                       # 커버리지 num total
-            sheet.range('H' + str(xlStartNum + Ycell)).value = '-'                                   # -
             Ycell = Ycell + 1
             print('.',end='')
         else:
@@ -253,6 +271,8 @@ else:
                 sheet.range('Z' + str(xlStartNum + Ycell)).value = date                                          # 날짜
                 sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]                           # 파일이름
                 sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                            # 테스트케이스 갯수
+                sheet.range('L' + str(xlStartNum + Ycell)).value = caseExplain[Ycell]                            # 테스트케이스 설명
+                sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F." + swddsCode[i] + "\nGoal : ")
                 if fileOnOff == 1:
                     if SCNPercent[i] == 'N/A':
                         sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i])
@@ -266,7 +286,6 @@ else:
                         sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i]) + '%'                  # 커버리지 brench %
                     sheet.range('W' + str(xlStartNum + Ycell)).value = BCNTest[i]                                    # 커버리지 num test
                     sheet.range('X' + str(xlStartNum + Ycell)).value = BCNTotal[i]                                   # 커버리지 num total
-                sheet.range('H' + str(xlStartNum + Ycell)).value = '-'                                               # -
                 Ycell = Ycell + 1
                 print('.', end='')
     #xlbook.sheets['Unit_TC'].name = fileName
