@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:InitializeEopCtrSpdProf_test0,""
+,<input>,g_hndEopCtrCurFilt.u16NSamples,par_f16EopCtrCurLmtMax,par_u16EopCtrCurFiltNoSmpl,<expect>,g_bEopCtrEna,g_eEopCtrState,g_f16EopCtrCurFilt,g_f16EopCtrCurLmtLow,g_f16EopCtrCurLmtUpp,g_f16EopCtrSpdProf,g_hndEopCtrCurFilt.u16NSamples,g_s16EopCtrPrevTgtSpd,g_u16EopCtrSpdChgCondHoldCnt,g_u16EopCtrStateElapCnt,<output>,g_bEopCtrEna,g_eEopCtrState,g_f16EopCtrCurFilt,g_f16EopCtrCurLmtLow,g_f16EopCtrCurLmtUpp,g_f16EopCtrSpdProf,g_hndEopCtrCurFilt.u16NSamples,g_s16EopCtrPrevTgtSpd,g_u16EopCtrSpdChgCondHoldCnt,g_u16EopCtrStateElapCnt
+1,"Set vlaue(g_hndEopCtrCurFilt) to verify boundary of conditional statement(min)","0","11430","5",,"0~1","0~4","-32768~32767","-32768~32767","-32768~32767","0~19661","0~15","0~3200","0~60000","0~60000",,"0","0","0","-11430","11430","0","5","0","0","0"
+2,"Set vlaue(g_hndEopCtrCurFilt) to verify boundary of conditional statement(max)","15","11430","5",,"0~1","0~4","-32768~32767","-32768~32767","-32768~32767","0~19661","0~15","0~3200","0~60000","0~60000",,"0","0","0","-11430","11430","0","5","0","0","0"

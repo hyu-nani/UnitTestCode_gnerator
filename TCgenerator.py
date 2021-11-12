@@ -34,7 +34,7 @@ print("┌───────────────────────�
 print("│         Unit TC report generator          │")
 print("│         Version 4.5.5                     │")
 print("└───────────────────────────────────────────┘\n")
-set_color(7)
+set_color(15)
 print('\x1b[97m')
 print("엑셀에 기입하려고 하는 CSV 파일은 csvFolder 에 넣고")
 print("테스트보고서와 개별테스트보고서는 테스트보고서 내보내기 디렉토리 경로를")
@@ -201,12 +201,14 @@ else:
                     stubList.append(str(valueList[int(selectNum[0])-1]+'\n'))
                     for p in range(1,len(selectNum)):
                         stubList[len(stubList)-1] = stubList[len(stubList)-1] + str(valueList[int(selectNum[p])])+'\n'
+                set_color(10)
                 print(functionName[i] + "_" + str(num) + " 는 어떤 타입의 테스트입니까? ")
                 print(" 1\t/\tAnalysis Of Boundary(경계값)")
                 print(" 2\t/\tEquivalence Testing(동등분할)")
                 print(" 3\t/\tFault Injection Testing(결함주입)")
                 print(" 4\t/\tDevelopment Of Positive(STATEMENT)")
                 testType.append(str(input("입력 : ")))
+                set_color(15)
                 valueList = []  # resets
                 book.app.quit()
                 time.sleep(0.4)
@@ -225,17 +227,18 @@ else:
                             num1 = sheet.range('A' + str(m + 1)).value
                             explaintext = sheet.range('C' + str(m + 1)).value
                             caseExplain[count] = str(caseExplain[count] + num1 + '. ' + explaintext + ' \n')
+                    set_color(10)
                     print(functionName[i] + "_" + str(num) + " 는 어떤 타입의 테스트입니까? ")
                     print(" 1\t/\tAnalysis Of Boundary(경계값)")
                     print(" 2\t/\tEquivalence Testing(동등분할)")
                     print(" 3\t/\tFault Injection Testing(결함주입)")
                     print(" 4\t/\tDevelopment Of Positive(STATEMENT)")
                     testType.append(str(input("입력 : ")))
+                    set_color(15)
                     book.app.quit()
                     time.sleep(0.4)
                     num = num + 1
                     count = count + 1
-                set_color(7)
                 print('\x1b[97m')
                 break
 
@@ -326,104 +329,109 @@ else:
         print('커버리지 보고서 파일없음')
         input()
     #엑셀자동생성
-    file_list = os.listdir('Result/')
-    for i in file_list:
-        if i == xl_file:
-            os.remove(str('Result/' + xl_file))
-    print("엑셀 생성")
-    shutil.copy(str('source/'+ xl_file), str('Result/' + xl_file)) # 결과 출력을 위한 빈파일 생성
-    os.rename(str('Result/' + xl_file), str('Result/' + xl_file))
-    xlbook = xw.Book(str('Result/' + xl_file))
-    print('출력',end='')
-    sheet = xlbook.sheets['Unit_TC']
-    Ycell = 0
-    xlStartNum = 13
-    for i in range(len(functionName)):
-        if functionNum[i] == 1:
-            sheet.range('C' + str(xlStartNum + Ycell)).value = str('SWDDS.' + swddsCode[i])      # SWDDS출력
-            sheet.range('B' + str(xlStartNum + Ycell)).value = str('SWUTS-F.' + swddsCode[i])    # SWUTS출력
-            sheet.range('E' + str(xlStartNum + Ycell)).value = functionName[i]                   # unit 이름출력
-            sheet.range('F' + str(xlStartNum + Ycell)).value = Tester                            # 테스터 출력
-            sheet.range('Z' + str(xlStartNum + Ycell)).value = date                              # 날짜
-            sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]               # 파일이름
-            sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                # 테스트케이스 갯수
-            sheet.range('L' + str(xlStartNum + Ycell)).value = caseExplain[Ycell]                # 테스트케이스 설명
-            sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F."+swddsCode[i]+"\nGoal : "+testType[Ycell])
-            if testType[Ycell] == DescriptionMsBND:
-                sheet.range('K' + str(xlStartNum + Ycell)).value = "Analysis of boundary values"
-            elif testType[Ycell] == DescriptionMsEQV:
-                sheet.range('K' + str(xlStartNum + Ycell)).value = "Equivalence testing"
-            elif testType[Ycell] == DescriptionMsFIT:
-                sheet.range('K' + str(xlStartNum + Ycell)).value = "Error guessing"
-                sheet.range('L' + str(xlStartNum + Ycell)).value = "Fault Injection Test"
-            elif testType[Ycell] == DescriptionMsSTA:
-                sheet.range('K' + str(xlStartNum + Ycell)).value = "Development of positive"
-            else:
-                sheet.range('K' + str(xlStartNum + Ycell)).value = "Equivalence testing"
-            if stubList[i] != '':
-                sheet.range('H' + str(xlStartNum + Ycell)).value = "Create the stub function\n"+ stubList[i] # stub 넣기
-            if fileOnOff == 1:
-                if SCNPercent[i] == 'N/A':
-                    sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i])
-                else:
-                    sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i]) + '%'      # 커버리지 state %
-                sheet.range('S' + str(xlStartNum + Ycell)).value = SCNTest[i]                        # 커버리지 num test
-                sheet.range('T' + str(xlStartNum + Ycell)).value = SCNTotal[i]                       # 커버리지 num total
-                if BCNPercent[i] =='N/A':
-                    sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i])
-                else:
-                    sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i]) + '%'      # 커버리지 brench %
-                sheet.range('W' + str(xlStartNum + Ycell)).value = BCNTest[i]                        # 커버리지 num test
-                sheet.range('X' + str(xlStartNum + Ycell)).value = BCNTotal[i]                       # 커버리지 num total
-            Ycell = Ycell + 1
-            print('.',end='')
-        else:
-            for j in range(int(functionNum[i])):
-                sheet.range('C' + str(xlStartNum + Ycell)).value = str('SWDDS.' + swddsCode[i])     # SWDDS출력
-                sheet.range('B' + str(xlStartNum + Ycell)).value = str('SWUTS-F.' + swddsCode[i]+'_')+str(j+1)   # SWUTS출력
-                sheet.range('E' + str(xlStartNum + Ycell)).value = functionName[i]                               # unit 이름출력
-                sheet.range('F' + str(xlStartNum + Ycell)).value = Tester                                        # 테스터 출력
-                sheet.range('Z' + str(xlStartNum + Ycell)).value = date                                          # 날짜
-                sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]                           # 파일이름
-                sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                            # 테스트케이스 갯수
-                sheet.range('L' + str(xlStartNum + Ycell)).value = caseExplain[Ycell]                            # 테스트케이스 설명
-                sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F." + swddsCode[i] + "\nGoal : "+testType[Ycell])
+    file_list = os.listdir('source/')
+    if len(file_list)==0:
+        print("source파일 없음")
+        input()
+    else:
+        file_list = os.listdir('Result/')
+        for i in file_list:
+            if i == xl_file:
+                os.remove(str('Result/' + xl_file))
+        print("엑셀 생성")
+        shutil.copy(str('source/'+ xl_file), str('Result/' + xl_file)) # 결과 출력을 위한 빈파일 생성
+        os.rename(str('Result/' + xl_file), str('Result/' + xl_file))
+        xlbook = xw.Book(str('Result/' + xl_file))
+        print('출력',end='')
+        sheet = xlbook.sheets['Unit_TC']
+        Ycell = 0
+        xlStartNum = 13
+        for i in range(len(functionName)):
+            if functionNum[i] == 1:
+                sheet.range('C' + str(xlStartNum + Ycell)).value = str('SWDDS.' + swddsCode[i])      # SWDDS출력
+                sheet.range('B' + str(xlStartNum + Ycell)).value = str('SWUTS-F.' + swddsCode[i])    # SWUTS출력
+                sheet.range('E' + str(xlStartNum + Ycell)).value = functionName[i]                   # unit 이름출력
+                sheet.range('F' + str(xlStartNum + Ycell)).value = Tester                            # 테스터 출력
+                sheet.range('Z' + str(xlStartNum + Ycell)).value = date                              # 날짜
+                sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]               # 파일이름
+                sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                # 테스트케이스 갯수
+                sheet.range('L' + str(xlStartNum + Ycell)).value = caseExplain[Ycell]                # 테스트케이스 설명
+                sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F."+swddsCode[i]+"\nGoal : "+testType[Ycell])
                 if testType[Ycell] == DescriptionMsBND:
                     sheet.range('K' + str(xlStartNum + Ycell)).value = "Analysis of boundary values"
                 elif testType[Ycell] == DescriptionMsEQV:
                     sheet.range('K' + str(xlStartNum + Ycell)).value = "Equivalence testing"
                 elif testType[Ycell] == DescriptionMsFIT:
                     sheet.range('K' + str(xlStartNum + Ycell)).value = "Error guessing"
-                    sheet.range('L' + str(xlStartNum + Ycell)).value = "Fault Injection Test"
+                    sheet.range('J' + str(xlStartNum + Ycell)).value = "Fault Injection Test"
                 elif testType[Ycell] == DescriptionMsSTA:
                     sheet.range('K' + str(xlStartNum + Ycell)).value = "Development of positive"
                 else:
                     sheet.range('K' + str(xlStartNum + Ycell)).value = "Equivalence testing"
                 if stubList[i] != '':
-                    sheet.range('H' + str(xlStartNum + Ycell)).value = "Create the stub function\n" + stubList[i]  # stub 넣기
+                    sheet.range('H' + str(xlStartNum + Ycell)).value = "Create the stub function\n"+ stubList[i] # stub 넣기
                 if fileOnOff == 1:
                     if SCNPercent[i] == 'N/A':
                         sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i])
                     else:
-                        sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i]) + '%'                  # 커버리지 state %
-                    sheet.range('S' + str(xlStartNum + Ycell)).value = SCNTest[i]                                    # 커버리지 num test
-                    sheet.range('T' + str(xlStartNum + Ycell)).value = SCNTotal[i]                                   # 커버리지 num total
-                    if BCNPercent[i] == 'N/A':
+                        sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i]) + '%'      # 커버리지 state %
+                    sheet.range('S' + str(xlStartNum + Ycell)).value = SCNTest[i]                        # 커버리지 num test
+                    sheet.range('T' + str(xlStartNum + Ycell)).value = SCNTotal[i]                       # 커버리지 num total
+                    if BCNPercent[i] =='N/A':
                         sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i])
                     else:
-                        sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i]) + '%'                  # 커버리지 brench %
-                    sheet.range('W' + str(xlStartNum + Ycell)).value = BCNTest[i]                                    # 커버리지 num test
-                    sheet.range('X' + str(xlStartNum + Ycell)).value = BCNTotal[i]                                   # 커버리지 num total
+                        sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i]) + '%'      # 커버리지 brench %
+                    sheet.range('W' + str(xlStartNum + Ycell)).value = BCNTest[i]                        # 커버리지 num test
+                    sheet.range('X' + str(xlStartNum + Ycell)).value = BCNTotal[i]                       # 커버리지 num total
                 Ycell = Ycell + 1
-                print('.', end='')
-    #xlbook.sheets['Unit_TC'].name = fileName # 시트 이름 변경
-    print()
-    print("생성완료")
-    xlbook.save()
-    xlbook.app.quit()
+                print('.',end='')
+            else:
+                for j in range(int(functionNum[i])):
+                    sheet.range('C' + str(xlStartNum + Ycell)).value = str('SWDDS.' + swddsCode[i])     # SWDDS출력
+                    sheet.range('B' + str(xlStartNum + Ycell)).value = str('SWUTS-F.' + swddsCode[i]+'_')+str(j+1)   # SWUTS출력
+                    sheet.range('E' + str(xlStartNum + Ycell)).value = functionName[i]                               # unit 이름출력
+                    sheet.range('F' + str(xlStartNum + Ycell)).value = Tester                                        # 테스터 출력
+                    sheet.range('Z' + str(xlStartNum + Ycell)).value = date                                          # 날짜
+                    sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]                           # 파일이름
+                    sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                            # 테스트케이스 갯수
+                    sheet.range('L' + str(xlStartNum + Ycell)).value = caseExplain[Ycell]                            # 테스트케이스 설명
+                    sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F." + swddsCode[i] + "\nGoal : "+testType[Ycell])
+                    if testType[Ycell] == DescriptionMsBND:
+                        sheet.range('K' + str(xlStartNum + Ycell)).value = "Analysis of boundary values"
+                    elif testType[Ycell] == DescriptionMsEQV:
+                        sheet.range('K' + str(xlStartNum + Ycell)).value = "Equivalence testing"
+                    elif testType[Ycell] == DescriptionMsFIT:
+                        sheet.range('K' + str(xlStartNum + Ycell)).value = "Error guessing"
+                        sheet.range('J' + str(xlStartNum + Ycell)).value = "Fault Injection Test"
+                    elif testType[Ycell] == DescriptionMsSTA:
+                        sheet.range('K' + str(xlStartNum + Ycell)).value = "Development of positive"
+                    else:
+                        sheet.range('K' + str(xlStartNum + Ycell)).value = "Equivalence testing"
+                    if stubList[i] != '':
+                        sheet.range('H' + str(xlStartNum + Ycell)).value = "Create the stub function\n" + stubList[i]  # stub 넣기
+                    if fileOnOff == 1:
+                        if SCNPercent[i] == 'N/A':
+                            sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i])
+                        else:
+                            sheet.range('R' + str(xlStartNum + Ycell)).value = str(SCNPercent[i]) + '%'                  # 커버리지 state %
+                        sheet.range('S' + str(xlStartNum + Ycell)).value = SCNTest[i]                                    # 커버리지 num test
+                        sheet.range('T' + str(xlStartNum + Ycell)).value = SCNTotal[i]                                   # 커버리지 num total
+                        if BCNPercent[i] == 'N/A':
+                            sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i])
+                        else:
+                            sheet.range('V' + str(xlStartNum + Ycell)).value = str(BCNPercent[i]) + '%'                  # 커버리지 brench %
+                        sheet.range('W' + str(xlStartNum + Ycell)).value = BCNTest[i]                                    # 커버리지 num test
+                        sheet.range('X' + str(xlStartNum + Ycell)).value = BCNTotal[i]                                   # 커버리지 num total
+                    Ycell = Ycell + 1
+                    print('.', end='')
+        #xlbook.sheets['Unit_TC'].name = fileName # 시트 이름 변경
+        print()
+        print("생성완료")
+        xlbook.save()
+        xlbook.app.quit()
     file_list = os.listdir(str('testReport/'+projectName+'/Test_Result/'))
     print("Test Result xl 파일 가져오는 중.")
-    set_color(5)
+    set_color(11)
     print('\x1b[92m')
     for i in range(len(functionName)):
         k = 0
@@ -441,7 +449,7 @@ else:
                             i] + '_' + str(k + 1) + '.xls')
                     k = k + 1
             p = p + 1
-    set_color(7)
+    set_color(15)
     print('\x1b[97m')
     print("완료")
 

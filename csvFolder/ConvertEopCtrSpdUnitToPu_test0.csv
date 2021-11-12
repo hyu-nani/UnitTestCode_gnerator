@@ -1,0 +1,6 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:ConvertEopCtrSpdUnitToPu_test0,""
+,<input>,speed_rpm,<expect>,returnVar,<output>,returnVar
+1,"Set the value(speed_rpm) to verify boundary of conditional statement(min)","-6000",,"-32768~32767",,"-32768"
+2,"Set the value(speed_rpm) to verify boundary of conditional statement(0)","0",,"-32768~32767",,"0"
+3,"Set the value(speed_rpm) to verify boundary of conditional statement(max)","6000",,"-32768~32767",,"-32768"

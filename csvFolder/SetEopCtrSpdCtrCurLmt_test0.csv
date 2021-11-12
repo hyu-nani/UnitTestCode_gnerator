@@ -1,0 +1,6 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:SetEopCtrSpdCtrCurLmt_test0,""
+,<input>,g_f16EopCtrCurLmtLow,g_f16EopCtrCurLmtUpp,g_hndEopCtrCurLmtLowRamp.f16State,g_hndEopCtrCurLmtUppRamp.f16State,<expect>,g_hndEopCtrCurLmtLowRamp.f16State,g_hndEopCtrCurLmtUppRamp.f16State,<output>,g_hndEopCtrCurLmtLowRamp.f16State,g_hndEopCtrCurLmtUppRamp.f16State
+1,"Set the value(g_f16EopCtrCurLmtLow, g_f16EopCtrCurLmtUpp, g_hndEopCtrCurLmtUppRamp, g_hndEopCtrCurLmtLowRamp) to verify boundary of conditional statement(min)","-11430","-11430","-11430","-11430",,"-11430~11430","-11430~11430",,"-11430","-11430"
+2,"Set the value(g_f16EopCtrCurLmtLow, g_f16EopCtrCurLmtUpp, g_hndEopCtrCurLmtUppRamp, g_hndEopCtrCurLmtLowRamp) to verify boundary of conditional statement(0)","0","0","0","0",,"-11430~11430","-11430~11430",,"0","0"
+3,"Set the value(g_f16EopCtrCurLmtLow, g_f16EopCtrCurLmtUpp, g_hndEopCtrCurLmtUppRamp, g_hndEopCtrCurLmtLowRamp) to verify boundary of conditional statement(max)","11430","11430","11430","11430",,"-11430~11430","-11430~11430",,"11430","11430"
