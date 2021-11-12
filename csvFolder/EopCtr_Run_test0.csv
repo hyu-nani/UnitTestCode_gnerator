@@ -1,9 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:EopCtr_Run_test0,""
-,<input>,CheckEopCtrEnaMode,g_bEopCtrEna,g_eEopCtrState,g_f16EopCtrRefSpd,g_hndEopCtrSpdErrFilt.u16NSamples,g_u16EopCtrStateElapCnt,<expect>,g_bEopCtrEna,g_f16EopCtrRefSpd,g_f16EopCtrSpdErr,g_hndEopCtrSpdErrFilt.u16NSamples,g_s16EopCtrPrevTgtSpd,g_u16EopCtrStateElapCnt,<output>,g_bEopCtrEna,g_f16EopCtrRefSpd,g_f16EopCtrSpdErr,g_hndEopCtrSpdErrFilt.u16NSamples,g_s16EopCtrPrevTgtSpd,g_u16EopCtrStateElapCnt
-1,"Set the value (g_u16EopCtrStateElapCnt) to verify boundary of condictional statement(0) of line 213","0","FALSE(0)","EOP_STATE_DISABLED(0)","0","0","0",,"0~1","0~19660","-32768~32767","0~15","0~3200","0~60000",,"0","0","0","0","0","5"
-2,"Set the value (g_u16EopCtrStateElapCnt) to verify boundary of condictional statement(-1) of line 213
-
-","0","FALSE(0)","EOP_STATE_DISABLED(0)","0","0","59999",,"0~1","0~19660","-32768~32767","0~15","0~3200","0~60000",,"0","0","0","0","0","60000"
-3,"Set the value (g_u16EopCtrStateElapCnt) to verify boundary of condictional statement(=) of line 213","1","FALSE(0)","EOP_STATE_DISABLED(0)","0","0","60000",,"0~1","0~19660","-32768~32767","0~15","0~3200","0~60000",,"1","0","0","0","0","60000"
-4,"Set the value (g_g_f16EopCtrRefSpd) to verify boundary of condictional statement(=) of line 213","1","TRUE(1)","EOP_STATE_DISABLED(0)","19660","0","60000",,"0~1","0~19660","-32768~32767","0~15","0~3200","0~60000",,"1","0","0","0","0","60000"

@@ -1,7 +1,5 @@
 Tester : BaeHyeonHan
-date : 2021-09-23
-file_name: apCurSig.c
-Test_num: 40
+date : 2021-11-10
 
 //////////////////////////////////////////////////////////////
 
