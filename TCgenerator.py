@@ -1,4 +1,17 @@
 # [Flowinus]
+STD_INPUT_HANDLE = -10
+STD_OUTPUT_HANDLE = -11
+STD_ERROR_HANDLE = -12
+
+FOREGROUND_BLACK = 0x00
+FOREGROUND_BLUE = 0x01  # text color contains blue.
+FOREGROUND_GREEN = 0x02  # text color contains green.
+FOREGROUND_RED = 0x04  # text color contains red.
+FOREGROUND_INTENSITY = 0x08  # text color is intensified.
+BACKGROUND_BLUE = 0x10  # background color contains blue.
+BACKGROUND_GREEN = 0x20  # background color contains green.
+BACKGROUND_RED = 0x40  # background color contains red.
+BACKGROUND_INTENSITY = 0x80  # background color is intensified.
 
 import os
 import csv
@@ -7,11 +20,21 @@ import xlwings as xw
 import shutil
 from datetime import date
 import time
+import ctypes
+
+std_out_handle = ctypes.windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
+def set_color(color, handle=std_out_handle):
+    bool = ctypes.windll.kernel32.SetConsoleTextAttribute(handle, color)
+    return bool
+    set_color(i)
+    print("Hello, world!")
+set_color(3)
 print('\x1b[96m')
 print("┌───────────────────────────────────────────┐")
 print("│         Unit TC report generator          │")
-print("│         Version 4.5.4                     │")
+print("│         Version 4.5.5                     │")
 print("└───────────────────────────────────────────┘\n")
+set_color(7)
 print('\x1b[97m')
 print("엑셀에 기입하려고 하는 CSV 파일은 csvFolder 에 넣고")
 print("테스트보고서와 개별테스트보고서는 테스트보고서 내보내기 디렉토리 경로를")
@@ -163,10 +186,11 @@ else:
                     C = sheet.range('A' + str(n + 4)).value
                     if C == "번호" or C == '4. 테스트 세부 정보':
                         active = 1
+                set_color(6)
                 print('\x1b[96m')
                 print(functionName[i] + " 안에 Stub 함수가 있습니까? ")
                 print("Num\t/\t Value name")
-                print("0\t/\t<없음>")
+                print(" 0\t/\t<없음>")
                 for p in range(1,len(valueList)+1):
                     print(" "+str(p) + '\t/\t' + str(valueList[p-1]))
                 selectNum = input("숫자 입력 : ").split(" ")
@@ -177,7 +201,7 @@ else:
                     stubList.append(str(valueList[int(selectNum[0])-1]+'\n'))
                     for p in range(1,len(selectNum)):
                         stubList[len(stubList)-1] = stubList[len(stubList)-1] + str(valueList[int(selectNum[p])])+'\n'
-                print(functionName[i] + " 는 어떤 타입의 테스트입니까? ")
+                print(functionName[i] + "_" + str(num) + " 는 어떤 타입의 테스트입니까? ")
                 print(" 1\t/\tAnalysis Of Boundary(경계값)")
                 print(" 2\t/\tEquivalence Testing(동등분할)")
                 print(" 3\t/\tFault Injection Testing(결함주입)")
@@ -201,7 +225,7 @@ else:
                             num1 = sheet.range('A' + str(m + 1)).value
                             explaintext = sheet.range('C' + str(m + 1)).value
                             caseExplain[count] = str(caseExplain[count] + num1 + '. ' + explaintext + ' \n')
-                    print(functionName[i] + "_"+ str(num) + " 는 어떤 타입의 테스트입니까? ")
+                    print(functionName[i] + "_" + str(num) + " 는 어떤 타입의 테스트입니까? ")
                     print(" 1\t/\tAnalysis Of Boundary(경계값)")
                     print(" 2\t/\tEquivalence Testing(동등분할)")
                     print(" 3\t/\tFault Injection Testing(결함주입)")
@@ -211,6 +235,7 @@ else:
                     time.sleep(0.4)
                     num = num + 1
                     count = count + 1
+                set_color(7)
                 print('\x1b[97m')
                 break
 
@@ -398,6 +423,7 @@ else:
     xlbook.app.quit()
     file_list = os.listdir(str('testReport/'+projectName+'/Test_Result/'))
     print("Test Result xl 파일 가져오는 중.")
+    set_color(5)
     print('\x1b[92m')
     for i in range(len(functionName)):
         k = 0
@@ -415,6 +441,7 @@ else:
                             i] + '_' + str(k + 1) + '.xls')
                     k = k + 1
             p = p + 1
+    set_color(7)
     print('\x1b[97m')
     print("완료")
 
