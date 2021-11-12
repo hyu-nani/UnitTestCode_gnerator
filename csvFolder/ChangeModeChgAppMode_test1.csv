@@ -1,0 +1,7 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:ChangeModeChgAppMode_test1,""
+,<input>,g_bModeChgAppCaution,g_bModeChgAppFailure,g_bModeChgAppWarning,g_bModeChgShutDown,g_u16ModeChgOpuFlt,<expect>,<output>
+1,"Set the value(g_bModeChgShutDown) to verify coverage(T) of line 183","FALSE(0)","FALSE(0)","FALSE(0)","TRUE(1)","0",,
+2,"Set the value(g_bModeChgAppFailure) to verify coverage(T) of line 188","FALSE(0)","TRUE(1)","FALSE(0)","FALSE(0)","0",,
+3,"Set the value(g_bModeChgAppWarning) to verify coverage(T) of line 192","FALSE(0)","FALSE(0)","TRUE(1)","FALSE(0)","0",,
+4,"Set the value(g_bModeChgAppCaution) to verify coverage(T) of line 196","TRUE(1)","FALSE(0)","FALSE(0)","FALSE(0)","0",,

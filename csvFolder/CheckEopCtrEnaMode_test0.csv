@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckEopCtrEnaMode_test0,""
+,<input>,g_bEopCtrEna,g_f16EopCtrRefSpd,RteApp_ReadFuncMode,target_rpm,<expect>,returnVar,<output>,returnVar
+1,"Set the value(g_f16EopCtrRefSpd, target_rpm) to verify boundary of conditional statement(min)","TRUE(1)","0","0","0",,"0~1",,"0"
+2,"Set the value(g_f16EopCtrRefSpd, target_rpm) to verify boundary of conditional statement(max)","TRUE(1)","19660","0","3200",,"0~1",,"0"

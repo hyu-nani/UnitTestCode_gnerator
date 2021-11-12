@@ -1,0 +1,11 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckSigRngBatVoltRngLow_test0,""
+,<input>,battery_voltage,g_u16SigRngBatVoltLowCntClr,g_u16SigRngBatVoltLowCntSet,g_u32SigRngChkFlag,par_f16FltBatVoltLowClrThrs,par_f16FltBatVoltLowSetThrs,par_u16FltBatVoltLowClrTim,par_u16FltBatVoltLowSetTim,<expect>,g_u16SigRngBatVoltLowCntClr,g_u16SigRngBatVoltLowCntSet,<output>,g_u16SigRngBatVoltLowCntClr,g_u16SigRngBatVoltLowCntSet
+1,"Set the value(g_u16SigRngBatVoltLowCntClr, g_u16SigRngBatVoltLowCntSet, battery_voltage) to verify boundary of conditional statement(0)","0","0","0","0","6664","6220","1000","1000",,"0~60000","0~60000",,"0","20"
+2,"Set the value(g_u16SigRngBatVoltLowCntClr) to verify boundary of conditional statement(0) of line 411","0","60000","0","0","6664","6220","1000","1000",,"0~60000","0~60000",,"0","20"
+3,"Set the value(g_u16SigRngBatVoltLowCntSet) to verify boundary of conditional statement(max) of line 416","0","0","60000","0","6664","6220","1000","1000",,"0~60000","0~60000",,"0","60000"
+4,"Set the value(battery_voltage) to verify boundary of conditional statement(-1) of line 436","6219","0","0","0","6664","6220","1000","1000",,"0~60000","0~60000",,"0","20"
+5,"Set the value(battery_voltage) to verify boundary of conditional statement(=) of line 436","6220","0","0","0","6664","6220","1000","1000",,"0~60000","0~60000",,"0","0"
+6,"Set the value(battery_voltage) to verify boundary of conditional statement(=) of line 426","6664","0","0","2","6664","6220","1000","1000",,"0~60000","0~60000",,"0","0"
+7,"Set the value(battery_voltage) to verify boundary of conditional statement(+1) of line 426","6665","0","0","2","6664","6220","1000","1000",,"0~60000","0~60000",,"20","0"
+8,"Set the value(battery_voltage) to verify boundary of conditional statement(max) of line 426","32767","60000","60000","0","6664","6220","1000","1000",,"0~60000","0~60000",,"0","0"

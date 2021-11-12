@@ -147,8 +147,10 @@ else:
     file_list = os.listdir(str('testReport/' + projectName + '/Test_Result/'))
     print(functionName)
     count=0
+    allcount=0
     stubNum = 0
     for i in range(len(functionName)):
+        allcount = allcount + 1
         num = 0
         for j in file_list:
             name = j.split('_test')
@@ -186,6 +188,8 @@ else:
                     C = sheet.range('A' + str(n + 4)).value
                     if C == "번호" or C == '4. 테스트 세부 정보':
                         active = 1
+                set_color(2)
+                print(str(len(functionName)) + "개 중 " + str(allcount))
                 set_color(6)
                 print('\x1b[96m')
                 print(functionName[i] + " 안에 Stub 함수가 있습니까? ")
@@ -241,7 +245,6 @@ else:
                     count = count + 1
                 print('\x1b[97m')
                 break
-
     print('SWDDS code:\t',end='')
     print(swddsCode)
     print(testCaseNum)
