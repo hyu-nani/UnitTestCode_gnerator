@@ -188,7 +188,7 @@ else:
                     C = sheet.range('A' + str(n + 4)).value
                     if C == "번호" or C == '4. 테스트 세부 정보':
                         active = 1
-                set_color(2)
+                set_color(12)
                 print(str(len(functionName)) + "개 중 " + str(allcount))
                 set_color(6)
                 print('\x1b[96m')
@@ -342,9 +342,9 @@ else:
             if i == xl_file:
                 os.remove(str('Result/' + xl_file))
         print("엑셀 생성")
-        shutil.copy(str('source/'+ xl_file), str('Result/' + xl_file)) # 결과 출력을 위한 빈파일 생성
-        os.rename(str('Result/' + xl_file), str('Result/' + xl_file))
-        xlbook = xw.Book(str('Result/' + xl_file))
+        shutil.copy(str('source/'+ xl_file), str('Result/' + "보고서.xlsx")) # 결과 출력을 위한 빈파일 생성
+        #os.rename(str('Result/' + xl_file), str('Result/' + xl_file))
+        xlbook = xw.Book(str('Result/' + "보고서.xlsx"))
         print('출력',end='')
         sheet = xlbook.sheets['Unit_TC']
         Ycell = 0
