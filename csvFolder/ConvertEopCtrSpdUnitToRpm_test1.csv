@@ -1,0 +1,4 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:ConvertEopCtrSpdUnitToRpm_test1,""
+,<input>,speed_pu,<expect>,returnVar,<output>,returnVar
+1,"Set the value(speed_pu = 0) to verify the equivalence testing for the range of variable","0",,"-6000~6000",,"0"

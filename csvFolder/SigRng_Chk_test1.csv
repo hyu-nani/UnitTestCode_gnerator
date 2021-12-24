@@ -1,0 +1,4 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:SigRng_Chk_test1,""
+,<input>,g_u32SigRngChkFlag,<expect>,<output>
+1,"Set the value(g_u32SigRngChkFlag = 122) to verify the equivalence testing for the range of variable","122",,

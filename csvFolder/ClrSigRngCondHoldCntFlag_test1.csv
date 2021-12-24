@@ -1,0 +1,7 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:ClrSigRngCondHoldCntFlag_test1,""
+,<input>,clearing_flag,condition_meet,count_threshold,g_u32SigRngChkFlag,p_checking_count_mem[0],<expect>,p_checking_count_mem[0],<output>,p_checking_count_mem[0]
+1,"Set the value(p_checking_count = 15000) to verify the equivalence of conditional statement(F) of line 504","1","TRUE(1)","30000","0","15000",,"0~60000",,"15020"
+2,"Set the value(p_checking_count = 45000) to verify the equivalence of conditional statement(T) of line 504","1","TRUE(1)","30000","0","45000",,"0~60000",,"45020"
+3,"Set the value(clearing_flag = 64) to verify the equivalence for the range of variable","64","TRUE(1)","0","0","0",,"0~60000",,"20"
+4,"Set the value(condition_meet = 0) to verify the equivalence of conditional statement(F) of line 497","1","FALSE(0)","0","0","0",,"0~60000",,"0"

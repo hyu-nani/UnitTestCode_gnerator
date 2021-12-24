@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:RteApp_WriteSpdOut_test0,""
+,<input>,speed_output,<expect>,g_f16RteAppSpdOut,<output>,g_f16RteAppSpdOut
+1,"Set the value(speed_output = -32768) to verify the boundary for the range of variable(min)","-32768",,"-32768~32767",,"-32768"
+2,"Set the value(speed_output = 32767) to verify the boundary for the range of variable(max)","32767",,"-32768~32767",,"32767"

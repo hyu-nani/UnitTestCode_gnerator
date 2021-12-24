@@ -1,13 +1,14 @@
 CodeScroll Unit Tester(Controller Tester) Test Data
 test name:CheckSigRngBatVoltRngHigh_test0,""
 ,<input>,battery_voltage,g_u16SigRngBatVoltHighCntClr,g_u16SigRngBatVoltHighCntSet,g_u32SigRngChkFlag,par_f16FltBatVoltHighClrThrs,par_f16FltBatVoltHighSetThrs,par_u16FltBatVoltHighClrTim,par_u16FltBatVoltHighSetTim,<expect>,g_u16SigRngBatVoltHighCntClr,g_u16SigRngBatVoltHighCntSet,<output>,g_u16SigRngBatVoltHighCntClr,g_u16SigRngBatVoltHighCntSet
-1,"Set the value(g_u16SigRngBatVoltHighCntClr) to verify boundary of conditional statement(=) of line 368","0","60000","0","0","29436","29880","1000","1000",,"0~60000","0~60000",,"0","0"
-2,"Set the value(g_u16SigRngBatVoltHighCntClr) to verify boundary of conditional statement(=) of line 373","0","0","60000","0","29436","29880","1000","1000",,"0~60000","0~60000",,"0","0"
-3,"Set the value(g_u16SigRngBatVoltHighCntClr) to verify boundary of conditional statement(=) of line 379","0","0","0","1","29436","29880","1000","1000",,"0~60000","0~60000",,"20","0"
-4,"Set the value(battery_voltage) to verify boundary of conditional statement(-1) of line 391","29435","0","0","1","29436","29880","1000","1000",,"0~60000","0~60000",,"20","0"
-5,"Set the value(battery_voltage) to verify boundary of conditional statement(=) of line 391","29436","0","0","1","29436","29880","1000","1000",,"0~60000","0~60000",,"0","0"
-6,"Set the value(battery_voltage) to verify boundary of conditional statement(=) of line 379","29880","0","0","0","29436","29880","1000","1000",,"0~60000","0~60000",,"0","0"
-7,"Set the value(battery_voltage) to verify boundary of conditional statement(+1) of line 379
+1,"Set the value(g_u16SigRngBatVoltHighCntClr = 60000) to verify boundary of conditional statement(=,F) of line 364","0","60000","0","0","29436","29880","1000","1000",,"0~60000","0~60000",,"0","0"
+2,"Set the value(g_u16SigRngBatVoltHighCntSet = 60000) to verify boundary of conditional statement(=,F) of line 369","0","0","60000","0","29436","29880","1000","1000",,"0~60000","0~60000",,"0","0"
+3,"Set the value(g_u16SigRngBatVoltHighCntClr = 0001) to verify bit boundary(SIG_RNG_BAT_VOLT_HIGH = 0001) of conditional statement(F) of line 375","0","0","0","1","29436","29880","1000","1000",,"0~60000","0~60000",,"20","0"
+4,"Set the value(g_u16SigRngBatVoltHighCntClr = 0010) to verify bit boundary(SIG_RNG_BAT_VOLT_HIGH = 0001) of conditional statement(T) of line 375","0","0","0","2","29436","29880","1000","1000",,"0~60000","0~60000",,"0","0"
+5,"Set the value(battery_voltage = 29435) to verify boundary of conditional statement(-1,T) of line 387","29435","0","0","1","29436","29880","1000","1000",,"0~60000","0~60000",,"20","0"
+6,"Set the value(battery_voltage = 29436) to verify boundary of conditional statement(=,F) of line 387","29436","0","0","1","29436","29880","1000","1000",,"0~60000","0~60000",,"0","0"
+7,"Set the value(battery_voltage = 29880) to verify boundary of conditional statement(=,F) of line 378
+","29880","0","0","0","29436","29880","1000","1000",,"0~60000","0~60000",,"0","0"
+8,"Set the value(battery_voltage = 29881) to verify boundary of conditional statement(+1,T) of line 378
 ","29881","0","0","0","29436","29880","1000","1000",,"0~60000","0~60000",,"0","20"
-8,"Set the value(battery_voltage) to verify boundary of conditional statement(max)
-","32767","0","0","0","29436","29880","1000","1000",,"0~60000","0~60000",,"0","20"
+9,"Set the value(battery_voltage = 32767) to verify boundary for the range of variables(max)","32767","0","0","0","29436","29880","1000","1000",,"0~60000","0~60000",,"0","20"

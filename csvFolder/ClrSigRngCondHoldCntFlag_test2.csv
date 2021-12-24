@@ -1,0 +1,4 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:ClrSigRngCondHoldCntFlag_test2,""
+,<input>,clearing_flag,condition_meet,count_threshold,g_u32SigRngChkFlag,p_checking_count_mem[0],<expect>,p_checking_count_mem[0],<output>,p_checking_count_mem[0]
+1,"Set the value(p_checking_count = 60001) to verify exception of conditional statement(T) of line 514","1","TRUE(1)","0","0","60001",,"0~60000",,"60000"

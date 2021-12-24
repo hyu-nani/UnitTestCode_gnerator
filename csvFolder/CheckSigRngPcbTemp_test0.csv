@@ -1,4 +1,4 @@
 CodeScroll Unit Tester(Controller Tester) Test Data
 test name:CheckSigRngPcbTemp_test0,""
 ,<input>,<expect>,<output>
-1,"Set the value(N/A) to verify the value",,
+1,"Create the test case to check statement coverage",,

@@ -1,0 +1,8 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:ClrSigRngCondHoldCntFlag_test0,""
+,<input>,clearing_flag,condition_meet,count_threshold,g_u32SigRngChkFlag,p_checking_count_mem[0],<expect>,p_checking_count_mem[0],<output>,p_checking_count_mem[0]
+1,"Set the value(p_checking_count = 0) to verify the boundary for the range of variable(min)","1","TRUE(1)","0","0","0",,"0~60000",,"20"
+2,"Set the value(p_checking_count = count_threshold-1) to verify the boundary of conditional statement(-1,F) of line 503","1","TRUE(1)","30000","0","29979",,"0~60000",,"29999"
+3,"Set the value(p_checking_count = count_threshold) to verify the boundary of conditional statement(=,T) of line 503","1","TRUE(1)","30000","0","29980",,"0~60000",,"30000"
+4,"Set the value(p_checking_count = 60000) to verify the boundary for the range of variables(max)","1","TRUE(1)","60000","0","60000",,"0~60000",,"60000"
+5,"Set the value(clearing_flag = 128) to verify the boundary for the range of variable(max)","128","TRUE(1)","0","0","0",,"0~60000",,"20"

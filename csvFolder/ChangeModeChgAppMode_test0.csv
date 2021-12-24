@@ -1,5 +1,5 @@
 CodeScroll Unit Tester(Controller Tester) Test Data
 test name:ChangeModeChgAppMode_test0,""
 ,<input>,g_bModeChgAppCaution,g_bModeChgAppFailure,g_bModeChgAppWarning,g_bModeChgShutDown,g_u16ModeChgOpuFlt,<expect>,<output>
-1,"Set the value(g_u16ModeChgOpuFlt) to verify boundary of conditional statement(min) of line 206","FALSE(0)","FALSE(0)","FALSE(0)","FALSE(0)","0",,
-2,"Set the value(g_u16ModeChgOpuFlt) to verify boundary of conditional statement(max) of line 206","FALSE(0)","FALSE(0)","FALSE(0)","FALSE(0)","4095",,
+1,"Set the value(g_u16ModeChgOpuFlt = 0) to verify the boundary for the range of variables(min)","FALSE(0)","FALSE(0)","FALSE(0)","FALSE(0)","0",,
+2,"Set the value(g_u16ModeChgOpuFlt = 4095) to verify the boundary for the range of variables(max)","FALSE(0)","FALSE(0)","FALSE(0)","FALSE(0)","4095",,

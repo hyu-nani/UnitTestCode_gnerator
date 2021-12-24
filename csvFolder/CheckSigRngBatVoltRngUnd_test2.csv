@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckSigRngBatVoltRngUnd_test2,""
+,<input>,battery_voltage,g_u16SigRngBatVoltUndCntClr,g_u16SigRngBatVoltUndCntSet,g_u32SigRngChkFlag,par_f16FltBatVoltUndClrThrs,par_f16FltBatVoltUndSetThrs,par_u16FltBatVoltUndClrTim,par_u16FltBatVoltUndSetTim,<expect>,g_u16SigRngBatVoltUndCntClr,g_u16SigRngBatVoltUndCntSet,<output>,g_u16SigRngBatVoltUndCntClr,g_u16SigRngBatVoltUndCntSet
+1,"Set the value(g_u16SigRngBatVoltUndCntClr = 60001) to verify exception of value of line 238","0","60001","0","16","9552","8886","300","1500",,"0~60000","0~60000",,"0","0"
+2,"Set the value(g_u16SigRngBatVoltUndCntSet = 60001) to verify exception of value of line 228","0","0","60001","0","9552","8886","300","1500",,"0~60000","0~60000",,"0","60000"

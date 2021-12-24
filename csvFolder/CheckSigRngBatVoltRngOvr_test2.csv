@@ -1,0 +1,7 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckSigRngBatVoltRngOvr_test2,""
+,<input>,battery_voltage,g_u16SigRngBatVoltOvr1CntSet,g_u16SigRngBatVoltOvr2CntSet,g_u16SigRngBatVoltOvrCntClr,g_u32SigRngChkFlag,par_f16FltBatVoltOvrClrThrs,par_f16FltBatVoltOvrSetThrs1,par_f16FltBatVoltOvrSetThrs2,par_u16FltBatVoltOvrClrTim,par_u16FltBatVoltOvrSetTim1,par_u16FltBatVoltOvrSetTim2,<expect>,g_u16SigRngBatVoltOvr1CntSet,g_u16SigRngBatVoltOvr2CntSet,g_u16SigRngBatVoltOvrCntClr,<output>,g_u16SigRngBatVoltOvr1CntSet,g_u16SigRngBatVoltOvr2CntSet,g_u16SigRngBatVoltOvrCntClr
+1,"Set the value(g_u16SigRngBatVoltOvr1CntSet = 60001) to verify the exception of value
+","16383","60001","0","0","0","18883","19549","22660","300","1500","1",,"0~60000","0~60000","0~60000",,"0","0","0"
+2,"Set the value(g_u16SigRngBatVoltOvr2CntSet = 60001) to verify the exception of value","16383","0","60001","0","0","18883","19549","22660","300","1500","1",,"0~60000","0~60000","0~60000",,"0","0","0"
+3,"Set the value(g_u16SigRngBatVoltOvrCntClr = 60001) to verify the exception of value","16383","0","0","60001","255","18883","19549","22660","300","1500","1",,"0~60000","0~60000","0~60000",,"0","0","60000"

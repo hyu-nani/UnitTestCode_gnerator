@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:RteApp_WriteMsgSta_test0,""
+,<input>,state_flag,<expect>,g_u16RteAppMsgSta,<output>,g_u16RteAppMsgSta
+1,"Set the value(state_flag = 0) to verify the boundary for the range of variable(min)","0",,"0~45056",,"0"
+2,"Set the value(state_flag = 45056) to verify the boundary for the range of variable(max)","45056",,"0~45056",,"45056"

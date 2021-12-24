@@ -1,0 +1,4 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:SetEopCtrSpdCtrCurLmt_test1,""
+,<input>,g_hndEopCtrCurLmtLowRamp.f16State,g_hndEopCtrCurLmtUppRamp.f16State,<expect>,g_f16EopCtrCurLmtLow,g_f16EopCtrCurLmtUpp,g_hndEopCtrCurLmtLowRamp.f16State,g_hndEopCtrCurLmtUppRamp.f16State,<output>,g_f16EopCtrCurLmtLow,g_f16EopCtrCurLmtUpp,g_hndEopCtrCurLmtLowRamp.f16State,g_hndEopCtrCurLmtUppRamp.f16State
+1,"Set the value(g_hndEopCtrCurLmtLowRamp = 0, g_hndEopCtrCurLmtUppRamp = 0) to verify equivalence testing for the range of variables","0","0",,"-11430~11430","-11430~11430","-11430~11430","-11430~11430",,"0","0","0","0"

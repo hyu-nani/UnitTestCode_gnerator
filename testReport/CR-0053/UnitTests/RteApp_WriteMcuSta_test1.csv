@@ -1,0 +1,4 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:RteApp_WriteMcuSta_test1,""
+,<input>,status_flag,<expect>,g_u32RteAppMcuSta,<output>,g_u32RteAppMcuSta
+1,"Set the value(status_flag = 67108864) to verify the equivalence for the range of variable","67108864",,"0~134217728",,"67108864"

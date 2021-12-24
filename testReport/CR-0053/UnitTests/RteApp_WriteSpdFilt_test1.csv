@@ -1,0 +1,4 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:RteApp_WriteSpdFilt_test1,""
+,<input>,filtered_speed,<expect>,g_s16RteAppSpdFilt,<output>,g_s16RteAppSpdFilt
+1,"Set the value(filtered_speed = 0) to verify the equivalence for the range of variable","0",,"-6000~6000",,"0"

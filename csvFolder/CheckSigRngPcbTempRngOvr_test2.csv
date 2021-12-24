@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CheckSigRngPcbTempRngOvr_test2,""
+,<input>,g_u16SigRngPcbTempOvrCntClr,g_u16SigRngPcbTempOvrCntSet,g_u32SigRngChkFlag,par_f16FltPcbTempOvrClrThrs,par_f16FltPcbTempOvrSetThrs,par_u16FltPcbTempOvrClrTim,par_u16FltPcbTempOvrSetTim,pcb_temperature,<expect>,g_u16SigRngPcbTempOvrCntClr,g_u16SigRngPcbTempOvrCntSet,<output>,g_u16SigRngPcbTempOvrCntClr,g_u16SigRngPcbTempOvrCntSet
+1,"Set the value(g_u16SigRngPcbTempOvrCntClr = 60001) to verify exception of conditional statement of line 297","60001","0","32","4096","4587","1000","1000","-1311",,"0~60000","0~60000",,"60000","0"
+2,"Set the value(g_u16SigRngPcbTempOvrCntSet = 60001) to verify exception of conditional statement of line 286","0","60001","0","4096","4587","1000","1000","-1311",,"0~60000","0~60000",,"0","0"

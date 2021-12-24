@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:RteApp_WriteSigRng_test0,""
+,<input>,checking_flag,<expect>,g_u32RteAppSigRng,<output>,g_u32RteAppSigRng
+1,"Set the value(checking_flag = 0) to verify the boundary for the range of variable(min)","0",,"0~255",,"0"
+2,"Set the value(checking_flag = 255) to verify the boundary for the range of variable(max)","0",,"0~255",,"0"
