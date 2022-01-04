@@ -1,5 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_WriteOprMode_test0,""
-,<input>,operation_mode,<expect>,g_eRteAppOprMode,<output>,g_eRteAppOprMode
-1,"Set the value(operation_mode = 0) to verify the boundary for the range of variable(min)","OPR_MODE_OFF(0)",,"0~5",,"0"
-2,"Set the value(operation_mode = 5) to verify the boundary for the range of variable(max)","OPR_MODE_TEST(5)",,"0~5",,"5"

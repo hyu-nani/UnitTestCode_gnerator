@@ -1,5 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:SetEopCtrSpdCtrCurLmt_test0,""
-,<input>,g_hndEopCtrCurLmtLowRamp.f16State,g_hndEopCtrCurLmtUppRamp.f16State,<expect>,g_f16EopCtrCurLmtLow,g_f16EopCtrCurLmtUpp,g_hndEopCtrCurLmtLowRamp.f16State,g_hndEopCtrCurLmtUppRamp.f16State,<output>,g_f16EopCtrCurLmtLow,g_f16EopCtrCurLmtUpp,g_hndEopCtrCurLmtLowRamp.f16State,g_hndEopCtrCurLmtUppRamp.f16State
-1,"Set the value(g_hndEopCtrCurLmtLowRamp=-11430, g_hndEopCtrCurLmtUppRamp=-11430) to verify boundary for the range of variables(min)","-11430","-11430",,"-11430~11430","-11430~11430","-11430~11430","-11430~11430",,"0","0","-11430","-11430"
-2,"Set the value(g_hndEopCtrCurLmtLowRamp=11430, g_hndEopCtrCurLmtUppRamp=11430) to verify boundary for the range of variables(max)","11430","11430",,"-11430~11430","-11430~11430","-11430~11430","-11430~11430",,"0","0","11430","11430"

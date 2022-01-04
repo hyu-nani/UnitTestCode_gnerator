@@ -1,4 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CheckSigRngBatVolt_test0,""
-,<input>,<expect>,<output>
-1,"Create the test case to check statement coverage",,

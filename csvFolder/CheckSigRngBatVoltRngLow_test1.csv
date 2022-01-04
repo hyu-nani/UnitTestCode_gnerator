@@ -1,8 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CheckSigRngBatVoltRngLow_test1,""
-,<input>,battery_voltage,g_u16SigRngBatVoltLowCntClr,g_u16SigRngBatVoltLowCntSet,g_u32SigRngChkFlag,par_f16FltBatVoltLowClrThrs,par_f16FltBatVoltLowSetThrs,par_u16FltBatVoltLowClrTim,par_u16FltBatVoltLowSetTim,<expect>,g_u16SigRngBatVoltLowCntClr,g_u16SigRngBatVoltLowCntSet,<output>,g_u16SigRngBatVoltLowCntClr,g_u16SigRngBatVoltLowCntSet
-1,"Set the value(battery_voltage = 3110) to verify the equivalence of conditional statement(T) of line 422","3110","30000","30000","0","6664","6220","1000","1000",,"0~60000","0~60000",,"0","30020"
-2,"Set the value(battery_voltage = 19493) to verify the equivalence of conditional statement(F) of line 422","19493","30000","30000","0","6664","6220","1000","1000",,"0~60000","0~60000",,"0","0"
-3,"Set the value(battery_voltage = 3332) to verify the equivalence of conditional statement(F) of line 432","3332","30000","30000","2","6664","6220","1000","1000",,"0~60000","0~60000",,"0","0"
-4,"Set the value(battery_voltage = 19715) to verify the equivalence of conditional statement(T) of line 432","19715","30000","30000","2","6664","6220","1000","1000",,"0~60000","0~60000",,"30020","0"
-5,"Set the value(g_u32SigRngChkFlag = 1101) to verify the bit equivalence(SIG_RNG_BAT_VOLT_LOW = 0010) of conditional statement(T) of line 418","0","30000","30000","253","6664","6220","1000","1000",,"0~60000","0~60000",,"0","30020"

@@ -1,4 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_WritePcbTemp_test1,""
-,<input>,pcb_temperature,<expect>,g_f16RteAppPcbTemp,<output>,g_f16RteAppPcbTemp
-1,"Set the value(pcb_temperature = 2129) to verify the equivalence for the range of variable","2129",,"-1311~5570",,"2129"

@@ -1,7 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CheckEopCtrEnaMode_test1,""
-,<input>,g_bEopCtrEna,g_f16EopCtrRefSpd,RteApp_ReadFuncMode,target_rpm,<expect>,returnVar,<output>,returnVar
-1,"Set the value(RteApp_ReadFuncMode = 0, g_bEopCtrEna = 9830, target_rpm = 1600) to verify the equivalence testing for the range of variables","TRUE(1)","9830","0","1600",,"0~1",,"0"
-2,"Set the value(RteApp_ReadFuncMode = 1, g_bEopCtrEna = 9830, target_rpm = 1600) to verify the equivalence testing for the range of variables","TRUE(1)","9830","1","1600",,"0~1",,"0"
-3,"Set the value(RteApp_ReadFuncMode = 2, g_bEopCtrEna = 9830, target_rpm = 1600) to verify the equivalence testing for the range of variables","TRUE(1)","9830","2","1600",,"0~1",,"0"
-4,"Set the value(RteApp_ReadFuncMode = 3, g_bEopCtrEna = 9830, target_rpm = 1600) to verify the equivalence testing for the range of variables","TRUE(1)","9830","3","1600",,"0~1",,"0"

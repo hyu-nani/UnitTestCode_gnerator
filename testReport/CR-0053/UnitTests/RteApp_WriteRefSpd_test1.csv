@@ -1,4 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_WriteRefSpd_test1,""
-,<input>,reference_speed,<expect>,g_f16RteAppRefSpd,<output>,g_f16RteAppRefSpd
-1,"Set the value(reference_speed = 9830) to verify the equivalence for the range of variable","9830",,"0~19660",,"9830"

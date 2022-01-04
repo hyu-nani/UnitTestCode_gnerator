@@ -29,13 +29,12 @@ def set_color(color, handle=std_out_handle):
     set_color(i)
     print("Hello, world!")
 set_color(3)
-print('\x1b[96m')
 print()
 print("\t┌───────────────────────────────────────────┐")
 print("\t│                                           │")
 print("\t│       Unit TC report generator            │")
-print("\t│       Version 4.9.0                       │")
-print("\t│       Last update date 21/12/24           │")
+print("\t│       Version 4.9.8                       │")
+print("\t│       Last update date 22/01/03           │")
 print("\t│                             [ NANI ]      │")
 print("\t└───────────────────────────────────────────┘\n")
 print()
@@ -48,7 +47,11 @@ print("readme.txt 를 수정하시면 이름과 날짜를 기입할 수 있습�
 print("실행결과는 Result 폴더에 생성됩니다.")
 excelApp1 = win32com.client.dynamic.Dispatch('Excel.Application')
 excelApp1.Quit()
-modeAnswer = str(input("자동 분류를 하시겠습니까? y/n :"))
+modeAnswer = str(input("자동 분류를 하시겠습니까? Y/N :"))
+if modeAnswer =='Y':
+    modeAnswer = 'y'
+elif modeAnswer == 'N':
+    modeAnswer = 'n'
 if modeAnswer != 'y' and modeAnswer != 'n':
     modeAnswer = 'n'
 xl_file     =   'Report.xlsx'   #CT 빈파일
@@ -181,9 +184,13 @@ else:
                     if text1 == '번호':
                         num1 = sheet.range('A'+ str(m+1)).value
                         explaintext = sheet.range('C'+ str(m+1)).value
-                        caseExplain[count] = str(caseExplain[count] + num1 + '. ' + explaintext + ' \n')
+                        caseExplain[count] = str(caseExplain[count] + num1 + '. ' + explaintext + '\n')
                         if n == 0:
                             n = m
+                strline = ''
+                for k in range(len(caseExplain[count]) - 1):
+                    strline = strline + caseExplain[count][k]
+                caseExplain[count] = strline
                             #print("입력"+str(n))
                 if int(sheet.range('F11').value) != 0 or int(sheet.range('H11').value) != 0: #실패 또는 오류 찾기
                     testResultPassOrNot.append(1)
@@ -205,13 +212,15 @@ else:
                 set_color(6)
                 explain = sheet.range('C15').value.split(' ')
                 if "statement" in explain:
-                    print('\x1b[96m')
+                    set_color(6)
                     print("statement unit")
                     stubList.append("")
                     set_color(10)
                 else:
-                    print('\x1b[96m')
-                    print(functionName[i] + " 안에 Stub 함수가 있습니까? ")
+                    set_color(6)
+                    print(str('[ '+ functionName[i] + ' ]'), end='')
+                    print(" 안에 Stub 함수가 있습니까? ")
+                    print("stub이 여러개일 경우, 띄어쓰기로 적어주세요. ex) 1 2 3")
                     print("Num\t/\t Value name")
                     print(" Enter\t/\t<없음>")
                     for p in range(1,len(valueList)+1):
@@ -221,9 +230,13 @@ else:
                     if selectNum[0] == '0' or selectNum[0] == '':
                         stubList.append("")
                     else:
-                        stubList.append(str(valueList[int(selectNum[0])-1]+'\n'))
+                        stubList.append(str(valueList[int(selectNum[0])-1]+', '))
                         for p in range(1,len(selectNum)):
-                            stubList[len(stubList)-1] = stubList[len(stubList)-1] + str(valueList[int(selectNum[p])])+'\n'
+                            stubList[len(stubList)-1] = stubList[len(stubList)-1] + str(valueList[int(selectNum[p])])+', '
+                        strline = ''
+                        for k in range(len(stubList[i]) - 2):  ## remove ,
+                            strline = strline + stubList[i][k]
+                        stubList[i] = strline
                     set_color(10)
                 if modeAnswer == 'n':
                     print(functionName[i] + "_" + str(num) + " 는 어떤 타입의 테스트입니까? ")
@@ -233,16 +246,21 @@ else:
                     print(" Enter\t/\tDevelopment Of Positive(STATEMENT)")
                     answer = str(input("입력 : "))
                 else:
-                    if "statement" in explain:
+                    if "create" in explain or "Create" in explain:
                         answer = ''
-                    elif "boundary" in explain:
+                        print("word find.")
+                    elif "boundary" in explain or "Boundary" in explain:
                         answer = '1'
-                    elif "equivalence" in explain:
+                        print("word find.")
+                    elif "equivalence" in explain or "Equivalence" in explain:
                         answer = '2'
-                    elif "exception" in explain:
+                        print("word find.")
+                    elif "exception" in explain or "Exception" in explain:
                         answer = '3'
+                        print("word find.")
                     else:
                         answer = str(num+1)
+                        print("just file number")
                 if answer == '':
                     print("Statement")
                     testType.append("4")
@@ -271,12 +289,17 @@ else:
                         testResultPassOrNot.append(1)
                     else:
                         testResultPassOrNot.append(0)
+                    explain = sheet.range('C15').value.split(' ')
                     for m in range(1, 1000):
                         text1 = sheet.range('A' + str(m)).value
                         if text1 == '번호':
                             num1 = sheet.range('A' + str(m + 1)).value
                             explaintext = sheet.range('C' + str(m + 1)).value
-                            caseExplain[count] = str(caseExplain[count] + num1 + '. ' + explaintext + ' \n')
+                            caseExplain[count] = str(caseExplain[count] + num1 + '. ' + explaintext + '\n')
+                    strline = ''
+                    for k in range(len(caseExplain[count])-1):
+                        strline = strline + caseExplain[count][k]
+                    caseExplain[count] = strline
                     set_color(10)
                     if modeAnswer == 'n':
                         print(functionName[i] + "_" + str(num) + " 는 어떤 타입의 테스트입니까? ")
@@ -289,7 +312,18 @@ else:
                         if sheet.range('C15').value == "Create the test case to check statement coverage":
                             answer = ''
                         else:
-                            answer = str(num + 1)
+                            if "boundary" in explain or "Boundary" in explain:
+                                answer = '1'
+                                print("word find.")
+                            elif "equivalence" in explain or "Equivalence" in explain:
+                                answer = '2'
+                                print("word find.")
+                            elif "exception" in explain or "Exception" in explain:
+                                answer = '3'
+                                print("word find.")
+                            else:
+                                answer = str(num + 1)
+                                print("just file number")
                     if answer == '':
                         print("Statement")
                         testType.append("4")
@@ -431,7 +465,7 @@ else:
             sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]               # 파일이름
             sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                # 테스트케이스 갯수
             sheet.range('L' + str(xlStartNum + Ycell)).value = caseExplain[Ycell]                # 테스트케이스 설명
-            sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F."+swddsCode[i]+"\nGoal : "+testType[Ycell])
+            sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F." + swddsCode[i] + "_1\nGoal : " + testType[Ycell])
             if testType[Ycell] == DescriptionMsBND:
                 sheet.range('K' + str(xlStartNum + Ycell)).value = "Analysis of boundary values"
             elif testType[Ycell] == DescriptionMsEQV:
@@ -444,7 +478,7 @@ else:
             else:
                 sheet.range('K' + str(xlStartNum + Ycell)).value = "Equivalence testing"
             if stubList[i] != '':
-                sheet.range('H' + str(xlStartNum + Ycell)).value = "Create the stub function\n"+ stubList[i] # stub 넣기
+                sheet.range('H' + str(xlStartNum + Ycell)).value = "There is no compilation error\nCreate the stub function\n(" + stubList[i] +")" # stub 넣기
             if testResultPassOrNot[Ycell] == 0:
                 sheet.range('O' + str(xlStartNum + Ycell)).value = "OK"
             else:
@@ -469,14 +503,14 @@ else:
             print("보고서 작성")
             for j in range(int(functionNum[i])):
                 sheet.range('C' + str(xlStartNum + Ycell)).value = str('SWDDS.' + swddsCode[i])     # SWDDS출력
-                sheet.range('B' + str(xlStartNum + Ycell)).value = str('SWUTS-F.' + swddsCode[i]+'_')+str(j+1)   # SWUTS출력
+                sheet.range('B' + str(xlStartNum + Ycell)).value = str('SWUTS-F.' + swddsCode[i]+'_') + str(j+1)   # SWUTS출력
                 sheet.range('E' + str(xlStartNum + Ycell)).value = functionName[i]                               # unit 이름출력
                 sheet.range('F' + str(xlStartNum + Ycell)).value = Tester                                        # 테스터 출력
                 sheet.range('Z' + str(xlStartNum + Ycell)).value = date                                          # 날짜
                 sheet.range('D' + str(xlStartNum + Ycell)).value = functionFileName[i]                           # 파일이름
                 sheet.range('Q' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                            # 테스트케이스 갯수
                 sheet.range('L' + str(xlStartNum + Ycell)).value = caseExplain[Ycell]                            # 테스트케이스 설명
-                sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F." + swddsCode[i] + "\nGoal : "+testType[Ycell])
+                sheet.range('G' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F." + swddsCode[i] + '_' + str(j+1) + "\nGoal : "+testType[Ycell])
                 if testType[Ycell] == DescriptionMsBND:
                     sheet.range('K' + str(xlStartNum + Ycell)).value = "Analysis of boundary values"
                 elif testType[Ycell] == DescriptionMsEQV:
@@ -489,7 +523,7 @@ else:
                 else:
                     sheet.range('K' + str(xlStartNum + Ycell)).value = "Equivalence testing"
                 if stubList[i] != '':
-                    sheet.range('H' + str(xlStartNum + Ycell)).value = "Create the stub function\n" + stubList[i]  # stub 넣기
+                    sheet.range('H' + str(xlStartNum + Ycell)).value = "There is no compilation error\nCreate the stub function\n(" + stubList[i] +")" # stub 넣기
                 if testResultPassOrNot[Ycell] == 0:
                     sheet.range('O' + str(xlStartNum + Ycell)).value = "OK"
                 else:

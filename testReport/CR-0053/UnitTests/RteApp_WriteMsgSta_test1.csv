@@ -1,4 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_WriteMsgSta_test1,""
-,<input>,state_flag,<expect>,g_u16RteAppMsgSta,<output>,g_u16RteAppMsgSta
-1,"Set the value(state_flag = 22528) to verify the equivalence for the range of variable","22528",,"0~45056",,"22528"

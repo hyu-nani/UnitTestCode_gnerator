@@ -1,4 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_WriteOprMode_test1,""
-,<input>,operation_mode,<expect>,g_eRteAppOprMode,<output>,g_eRteAppOprMode
-1,"Set the value(operation_mode = 3) to verify the Equivalence for the range of variable","OPR_MODE_DIAGNOSIS(3)",,"0~5",,"3"

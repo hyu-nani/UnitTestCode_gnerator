@@ -1,5 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:RteApp_WriteTgtSpd_test0,""
-,<input>,target_speed,<expect>,g_s16RteAppTgtSpd,<output>,g_s16RteAppTgtSpd
-1,"Set the value(target_speed = 0) to verify the boundary for the range of variable(min)","0",,"0~3200",,"0"
-2,"Set the value(target_speed = 3200) to verify the boundary for the range of variable(max)","3200",,"0~3200",,"3200"

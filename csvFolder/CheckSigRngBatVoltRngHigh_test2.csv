@@ -1,5 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CheckSigRngBatVoltRngHigh_test2,""
-,<input>,battery_voltage,g_u16SigRngBatVoltHighCntClr,g_u16SigRngBatVoltHighCntSet,g_u32SigRngChkFlag,par_f16FltBatVoltHighClrThrs,par_f16FltBatVoltHighSetThrs,par_u16FltBatVoltHighClrTim,par_u16FltBatVoltHighSetTim,<expect>,g_u16SigRngBatVoltHighCntClr,g_u16SigRngBatVoltHighCntSet,<output>,g_u16SigRngBatVoltHighCntClr,g_u16SigRngBatVoltHighCntSet
-1,"Set the value(g_u16SigRngBatVoltHighCntClr = 60001) to verify the exception of conditional statment(T) of line 364","16383","60001","0","1","29436","29880","1000","1000",,"0~60000","0~60000",,"60000","0"
-2,"Set the value(g_u16SigRngBatVoltHighCntSet = 60001) to verify the exception of conditional statment(T) of line 369","16383","0","60001","1","29436","29880","1000","1000",,"0~60000","0~60000",,"20","0"
