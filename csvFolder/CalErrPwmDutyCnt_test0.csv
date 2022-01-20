@@ -1,0 +1,6 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CalErrPwmDutyCnt_test0,""
+,<input>,BswHal_GetBatVolt,par_f16SetDrvGndModVoltLv,par_f16SetDrvNorModVoltLv,par_f16SetDrvOpnModVoltLv,par_u16SetDrvPwmDutyCnt,par_u16SetDrvPwmDutyCntForGnd,par_u16SetDrvPwmDutyCntForOpn,<expect>,g_s16ErrDetDrvGndPwmCnt,g_s16ErrDetDrvNorPwmCnt,g_s16ErrDetDrvOpnPwmCnt,<output>,g_s16ErrDetDrvGndPwmCnt,g_s16ErrDetDrvNorPwmCnt,g_s16ErrDetDrvOpnPwmCnt
+1,"Set the value(BswHal_GetBatVolt=0) to verify the boundary of conditional statement(=,F) of line 467","0","1559","1066","2665","200","300","500",,"0~32767","0~32767","0~32767",,"300","200","500"
+2,"Set the value(BswHal_GetBatVolt=1) to verify the boundary of conditional statement(+1,T) of line 467","1","1559","1066","2665","200","300","500",,"0~32767","0~32767","0~32767",,"0","0","0"
+3,"Set the value(BswHal_GetBatVolt=32767) to verify the boundary for the range of variables(max)","32767","1559","1066","2665","200","300","500",,"0~32767","0~32767","0~32767",,"0","0","0"

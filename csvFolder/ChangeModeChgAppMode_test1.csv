@@ -1,9 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:ChangeModeChgAppMode_test1,""
-,<input>,g_bModeChgAppCaution,g_bModeChgAppFailure,g_bModeChgAppWarning,g_bModeChgShutDown,g_u16ModeChgOpuFlt,<expect>,<output>
-1,"Set the value(g_bModeChgShutDown = 1) to verify the equivalence of conditional statment(T) of line 161","FALSE(0)","FALSE(0)","FALSE(0)","TRUE(1)","0",,
-2,"Set the value(g_bModeChgAppFailure = 1) to verify the equivalence of conditional statment(T) of line 166","FALSE(0)","TRUE(1)","FALSE(0)","FALSE(0)","0",,
-3,"Set the value(g_bModeChgAppWarning = 1) to verify the equivalence of conditional statment(T) of line 170","FALSE(0)","FALSE(0)","TRUE(1)","FALSE(0)","0",,
-4,"Set the value(g_bModeChgAppCaution = 1) to verify the equivalence of conditional statment(T) of line 174","TRUE(1)","FALSE(0)","FALSE(0)","FALSE(0)","0",,
-5,"Set the value(g_bModeChgShutDown=0, g_bModeChgAppFailure=0, g_bModeChgAppWarning=0 ,g_bModeChgAppCaution=0) to verify the equivalence of conditional statment(T) of line 178","FALSE(0)","FALSE(0)","FALSE(0)","FALSE(0)","0",,
-6,"Set the value(g_u16ModeChgOpuFlt = 2048) to verify the equivalence for the range of variable","FALSE(0)","FALSE(0)","FALSE(0)","FALSE(0)","2048",,
