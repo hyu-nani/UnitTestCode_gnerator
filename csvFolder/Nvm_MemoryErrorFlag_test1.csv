@@ -1,0 +1,4 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:Nvm_MemoryErrorFlag_test1,""
+,<input>,Nvm_LoadEepromLong,<expect>,returnVar,<output>,returnVar
+1,"Set the value(Nvm_LoadEepromLong=16383) to verify the equivalence testing for the range of variables","16383",,"0~1",,"1"

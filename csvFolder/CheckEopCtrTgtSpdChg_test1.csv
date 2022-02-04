@@ -1,6 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CheckEopCtrTgtSpdChg_test1,""
-,<input>,g_f16EopCtrCurLmtNorm,g_s16EopCtrPrevTgtSpd,par_f32RefSpdDecRate,par_f32RefSpdIncRate,par_s16EopCtrSpdChgDiffThrs,target_rpm,<expect>,g_eEopCtrState,g_f16EopCtrCurLmtLow,g_f16EopCtrCurLmtUpp,g_f16EopCtrSpdProf,g_hndEopCtrRefSpdRamp.f32RampDown,g_hndEopCtrRefSpdRamp.f32RampUp,returnVar,<output>,g_eEopCtrState,g_f16EopCtrCurLmtLow,g_f16EopCtrCurLmtUpp,g_f16EopCtrSpdProf,g_hndEopCtrRefSpdRamp.f32RampDown,g_hndEopCtrRefSpdRamp.f32RampUp,returnVar
-1,"Set the value(target_change=797) to verify the equivalence testing of conditonal statement(T) of line 460","0","1600","10737418","10737418","5","797",,"0~4","-11430~0","0~11430","0~19660","0~10737418","0~10737418","0~1",,"2","0","0","4352","10737418","10737418","1"
-2,"Set the value(target_change=1600) to verify the equivalence testing of conditonal statement(F) of line 460","0","1600","10737418","10737418","5","1600",,"0~4","-11430~0","0~11430","0~19660","0~10737418","0~10737418","0~1",,"0","0","0","0","0","0","0"
-3,"Set the value(target_change=2397) to verify the equivalence testing of conditonal statement(T) of line 460","0","1600","10737418","10737418","5","2397",,"0~4","-11430~0","0~11430","0~19660","0~10737418","0~10737418","0~1",,"2","0","0","13090","10737418","10737418","1"

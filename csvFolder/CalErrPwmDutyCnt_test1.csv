@@ -1,4 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CalErrPwmDutyCnt_test1,""
-,<input>,BswHal_GetBatVolt,par_f16SetDrvGndModVoltLv,par_f16SetDrvNorModVoltLv,par_f16SetDrvOpnModVoltLv,par_u16SetDrvPwmDutyCnt,par_u16SetDrvPwmDutyCntForGnd,par_u16SetDrvPwmDutyCntForOpn,<expect>,g_s16ErrDetDrvGndPwmCnt,g_s16ErrDetDrvNorPwmCnt,g_s16ErrDetDrvOpnPwmCnt,<output>,g_s16ErrDetDrvGndPwmCnt,g_s16ErrDetDrvNorPwmCnt,g_s16ErrDetDrvOpnPwmCnt
-1,"Set the value(BswHal_GetBatVolt=16383) to verify the equivalence testing of conditional statement(T) of line 467","16383","1559","1066","2665","200","300","500",,"0~32767","0~32767","0~32767",,"0","0","0"

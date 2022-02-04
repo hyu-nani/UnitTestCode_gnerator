@@ -34,8 +34,8 @@ print()
 print("\t┌───────────────────────────────────────────┐")
 print("\t│                                           │")
 print("\t│       Unit TC report generator            │")
-print("\t│       Version 5.0.7                       │")
-print("\t│       Last update date 22/01/19           │")
+print("\t│       Version 5.0.9                       │")
+print("\t│       Last update date 22/02/04           │")
 print("\t│                             [ NANI ]      │")
 print("\t└───────────────────────────────────────────┘\n")
 print()
@@ -72,7 +72,7 @@ functionFileName    =   []    #테스트의 파일위치
 testCaseNum         =   []    #테스트케이스의 갯수
 valueList   =   []            #테스트 변수명의 리스트
 stubList    =   []            #테스트이름당 스텁이름
-testResultPassOrNot =   []    #테스트이름당 OK 또는 NOK
+testResultState =   []        #테스트이름당 상태 0=OK, 1=NOK, 2=Problem
 testType    =   []            #테스트당 타입
 
 # 1 = BND
@@ -141,7 +141,7 @@ else:
             functionName.append(name)
             functionNum.append(countNum)
             stubList.append('')
-            testResultPassOrNot.append(0)
+            testResultState.append(0)
             break
         elif name == testName[i]:
             countNum = countNum + 1
@@ -149,7 +149,7 @@ else:
             functionName.append(name)
             functionNum.append(countNum)
             stubList.append('')
-            testResultPassOrNot.append(0)
+            testResultState.append(0)
             name = testName[i]
             countNum = 1
     print('테스트 이름:\t',end='')
@@ -277,13 +277,13 @@ else:
                 set_color(6)
         print()
     xlbook = xw.Book(str("Report.xlsx"))
-    sheet = xlbook.sheets['StubList']
+    sheet = xlbook.sheets['Setting']
     Tester = sheet.range('G3').value
     date = sheet.range('G6').value
     if date == 'now':
         date = datetime.today().strftime('%Y-%m-%d')
     if modeAnswer == 'y':
-        print("find Stub")
+        print("find Stub") #find stub name
         numStub = 3
         text = sheet.range('B' + str(numStub)).value
         while text != '':
@@ -296,10 +296,10 @@ else:
                 else:
                     numCount = numCount + 1
             numStub = numStub + 1
-            if numStub > len(functionName):
-                break
             text = sheet.range('B' + str(numStub)).value
-        print("find NOT")
+            if numStub-2 > len(functionName):
+                break
+        print("find NOT") #find NOK list name
         numNOT = 3
         text = sheet.range('E' + str(numNOT)).value
         while text != '':
@@ -307,13 +307,13 @@ else:
             numCount = 0
             for i in functionName:
                 if i == text:
-                    testResultPassOrNot[numCount] = 1
+                    testResultState[numCount] = 1
                 else:
                     numCount = numCount + 1
             numNOT = numNOT + 1
-            if numNOT > len(functionName):
-                break
             text = sheet.range('E' + str(numNOT)).value
+            if numNOT-2 > len(functionName):
+                break
     xlbook.app.quit()
     print("데이터 수집완료")
     print('SWDDS code:\t',end='')
@@ -374,10 +374,12 @@ else:
                             functionFileName.append(text[len(text)-1])
                             StateCoverage.append(testResult[j + 1])
                             BrechCoverage.append(testResult[j + 2])
-                for i in range(len(functionName)):
+                for i in range(len(functionName)):#분리
                     if StateCoverage[i] != 'N/A':
                         bindata = StateCoverage[i].split('%')
                         SCNPercent.append(float(bindata[0]))
+                        if float(bindata[0]) != 100.00:
+                            testResultState[i] = 2
                         bindata = bindata[1].split('/')
                         SCNTest.append(float(bindata[0].strip('(')))
                         SCNTotal.append(float(bindata[1].strip(')')))
@@ -388,6 +390,8 @@ else:
                     if BrechCoverage[i] != 'N/A':
                         bindata = BrechCoverage[i].split('%')
                         BCNPercent.append(float(bindata[0]))
+                        if float(bindata[0]) != 100.00:
+                            testResultState[i] = 2
                         bindata = bindata[1].split('/')
                         BCNTest.append(float(bindata[0].strip('(')))
                         BCNTotal.append(float(bindata[1].strip(')')))
@@ -453,10 +457,12 @@ else:
                 sheet.range('K' + str(xlStartNum + Ycell)).value = "Equivalence testing"
             if stubList[i] != '':
                 sheet.range('H' + str(xlStartNum + Ycell)).value = "There is no compilation error\nCreate the stub function\n(" + stubList[i] +")" # stub 넣기
-            if testResultPassOrNot[i] == 0:
+            if testResultState[i] == 0: #OK
                 sheet.range('O' + str(xlStartNum + Ycell)).value = "OK"
-            else:
+            elif testResultState[i] == 1: #NOK
                 sheet.range('O' + str(xlStartNum + Ycell)).value = "NOK"
+            elif testResultState[i] == 2: #Problem
+                sheet.range('O' + str(xlStartNum + Ycell)).value = "Todo"
             if fileOnOff == 1:
                 print("커버리지 작성")
                 if SCNPercent[i] == 'N/A':
