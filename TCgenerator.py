@@ -76,13 +76,13 @@ testResultState =   []        #테스트이름당 상태 0=OK, 1=NOK, 2=Problem
 testType    =   []            #테스트당 타입
 
 # 1 = BND
-DescriptionMsBND = "Requirement Based Test among Analysis of boundary value of SWDDS."
+#DescriptionMsBND = "Requirement Based Test among Analysis of boundary value of SWDDS."
 # 2 = EQV
-DescriptionMsEQV = "Requirement Based Test among Equivalence testing of SWDDS."
+#DescriptionMsEQV = "Requirement Based Test among Equivalence testing of SWDDS."
 # 3 = FIT
-DescriptionMsFIT = "Fault Injection Test among Error guessing of SWDDS."
+#DescriptionMsFIT = "Fault Injection Test among Error guessing of SWDDS."
 # 4 = STATE
-DescriptionMsSTA = "Requirement Based Test among Development of positive of SWDDS."
+#DescriptionMsSTA = "Requirement Based Test among Development of positive of SWDDS."
 
 
 testName    =   []            #
@@ -314,6 +314,15 @@ else:
             text = sheet.range('E' + str(numNOT)).value
             if numNOT-2 > len(functionName):
                 break
+        #DescriptionMs 받아오기
+        # 1 = BND
+        DescriptionMsBND = sheet.range('G13').value
+        # 2 = EQV
+        DescriptionMsEQV = sheet.range('G15').value
+        # 3 = FIT
+        DescriptionMsFIT = sheet.range('G17').value
+        # 4 = STATE
+        DescriptionMsSTA = sheet.range('G19').value
     xlbook.app.quit()
     print("데이터 수집완료")
     print('SWDDS code:\t',end='')
@@ -378,7 +387,7 @@ else:
                     if StateCoverage[i] != 'N/A':
                         bindata = StateCoverage[i].split('%')
                         SCNPercent.append(float(bindata[0]))
-                        if float(bindata[0]) != 100.00:
+                        if float(bindata[0]) < 100.00: #100퍼센트인지 확인
                             testResultState[i] = 2
                         bindata = bindata[1].split('/')
                         SCNTest.append(float(bindata[0].strip('(')))
@@ -390,7 +399,7 @@ else:
                     if BrechCoverage[i] != 'N/A':
                         bindata = BrechCoverage[i].split('%')
                         BCNPercent.append(float(bindata[0]))
-                        if float(bindata[0]) != 100.00:
+                        if float(bindata[0]) < 100.00: #100퍼센트인지 확인
                             testResultState[i] = 2
                         bindata = bindata[1].split('/')
                         BCNTest.append(float(bindata[0].strip('(')))
