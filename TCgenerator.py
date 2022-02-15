@@ -34,8 +34,8 @@ print()
 print("\t┌───────────────────────────────────────────┐")
 print("\t│                                           │")
 print("\t│       Unit TC report generator            │")
-print("\t│       Version 5.0.9                       │")
-print("\t│       Last update date 22/02/04           │")
+print("\t│       Version 5.1.0                       │")
+print("\t│       Last update date 22/02/15           │")
 print("\t│                             [ NANI ]      │")
 print("\t└───────────────────────────────────────────┘\n")
 print()
@@ -60,6 +60,10 @@ Tester      =   ''                          #테스터
 fileName    =   ''                          #파일이름
 TCnumber    =   ''                          #테스트넘버
 TCresultName=   ''                          #
+
+resultOK = ''
+resultNOK = ''
+resultProblem = ''
 
 personal    =   []            #readme파일 읽기위한 빈통
 file_list   =   os.listdir('testReport/')
@@ -314,7 +318,8 @@ else:
             text = sheet.range('E' + str(numNOT)).value
             if numNOT-2 > len(functionName):
                 break
-        #DescriptionMs 받아오기
+        #각종 정보 갖고오기
+        print("기입정보 수집\n")
         # 1 = BND
         DescriptionMsBND = sheet.range('G13').value
         # 2 = EQV
@@ -323,6 +328,11 @@ else:
         DescriptionMsFIT = sheet.range('G17').value
         # 4 = STATE
         DescriptionMsSTA = sheet.range('G19').value
+        # 커버리지 반응값
+        resultOK = sheet.range('H22').value
+        resultNOK = sheet.range('H23').value
+        resultProblem = sheet.range('H24').value
+
     xlbook.app.quit()
     print("데이터 수집완료")
     print('SWDDS code:\t',end='')
@@ -423,8 +433,12 @@ else:
     if a == 0:
         print("보고서 파일이 없습니다.")
     file_list = os.listdir('Result/')
+    print("result 폴더 안 제거\n")
+    set_color(10)
     for i in file_list:
+        print('Remove > '+i)
         os.remove('Result/'+i)
+    set_color(15)
     print("엑셀 생성")
     shutil.copy(str(xl_file), str('Result/' + "보고서.xlsx")) # 결과 출력을 위한 빈파일 생성
     #os.rename(str('Result/' + xl_file), str('Result/' + xl_file))
@@ -467,11 +481,11 @@ else:
             if stubList[i] != '':
                 sheet.range('H' + str(xlStartNum + Ycell)).value = "There is no compilation error\nCreate the stub function\n(" + stubList[i] +")" # stub 넣기
             if testResultState[i] == 0: #OK
-                sheet.range('O' + str(xlStartNum + Ycell)).value = "OK"
+                sheet.range('O' + str(xlStartNum + Ycell)).value = resultOK
             elif testResultState[i] == 1: #NOK
-                sheet.range('O' + str(xlStartNum + Ycell)).value = "NOK"
+                sheet.range('O' + str(xlStartNum + Ycell)).value = resultNOK
             elif testResultState[i] == 2: #Problem
-                sheet.range('O' + str(xlStartNum + Ycell)).value = "Todo"
+                sheet.range('O' + str(xlStartNum + Ycell)).value = resultProblem
             if fileOnOff == 1:
                 print("커버리지 작성")
                 if SCNPercent[i] == 'N/A':
@@ -505,7 +519,7 @@ else:
                 if j == str(functionName[i] + '_test' + str(k) + '.xls'):
                     shutil.copy(str('testReport/' + projectName + '/Test_Result/' + functionName[i] + '_test' + str(
                         k) + '.xls'), str('Result/SWUTS-F.' + swddsCode[p] + '_' + str(k + 1) + '.xls'))
-                    print('copy: ' + functionName[i] + '_test' + str(k) + '.xls   \t\t-->\t SWUTS-F.' + swddsCode[
+                    print('COPY > ' + functionName[i] + '_test' + str(k) + '.xls   \t\t-->\t SWUTS-F.' + swddsCode[
                         p] + '_' + str(k + 1) + '.xls')
                     p =p+1
 
