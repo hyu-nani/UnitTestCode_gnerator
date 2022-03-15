@@ -1,5 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:Nvm_MemoryErrorFlag_test0,""
-,<input>,Nvm_LoadEepromLong,<expect>,returnVar,<output>,returnVar
-1,"Set the value(Nvm_LoadEepromLong=0) to verify the boundary for the range of variables(min)","0",,"0~1",,"0"
-2,"Set the value(Nvm_LoadEepromLong=32767) to verify the boundary for the range of variables(max)","32767",,"0~1",,"1"

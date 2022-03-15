@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:CanEol_Init_test0,""
+,<input>,CanEol_GetEolData,<expect>,g_stEolProcess.tU8CanEolNextIndex,g_u8EolAvailivility,<output>,g_stEolProcess.tU8CanEolNextIndex,g_u8EolAvailivility
+1,"Set the value (CanEol_GetEolData = 0) to verify boundary of conditional statement(-1,F) of line 99","0",,"0~201","0~1",,"1","1"
+2,"Set the value (CanEol_GetEolData = 1) to verify boundary of conditional statement(=,T) of line 99","1",,"0~201","0~1",,"1","1"
