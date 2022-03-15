@@ -34,7 +34,7 @@ print()
 print("\t┌───────────────────────────────────────────┐")
 print("\t│                                           │")
 print("\t│       Unit TC report generator            │")
-print("\t│       Version 5.1.1                       │")
+print("\t│       Version 5.1.2                       │")
 print("\t│       Last update date 22/03/15           │")
 print("\t│                             [ NANI ]      │")
 print("\t└───────────────────────────────────────────┘\n")
@@ -463,23 +463,28 @@ else:
             sheet.range('E' + str(xlStartNum + Ycell)).value = functionFileName[i]  # 파일이름
             sheet.range('C' + str(xlStartNum + Ycell)).value = functionName[i] #테스트이름                          # unit 이름출력
             sheet.range('W' + str(xlStartNum + Ycell)).value = Tester                                        # 테스터 출력
-            sheet.range('H' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F." + swddsCode[p] + '_' + str(j + 1) + "\nGoal : " + testType[Ycell])
+            #sheet.range('H' + str(xlStartNum + Ycell)).value = str("TestCase ID] SWUTS-F." + swddsCode[p] + '_' + str(j + 1) + "\nGoal : " + testType[Ycell])
             sheet.range('M' + str(xlStartNum + Ycell)).value = caseExplain[Ycell]  # 테스트케이스 설명
             sheet.range('X' + str(xlStartNum + Ycell)).value = date                                          # 날짜
             sheet.range('P' + str(xlStartNum + Ycell)).value = testCaseNum[Ycell]                            # 테스트케이스 갯수
             if testType[Ycell] == DescriptionMsBND:
                 sheet.range('G' + str(xlStartNum + Ycell)).value = "Analysis of boundary values"
+                sheet.range('F' + str(xlStartNum + Ycell)).value = "Requirements-based test"
             elif testType[Ycell] == DescriptionMsEQV:
                 sheet.range('G' + str(xlStartNum + Ycell)).value = "Equivalence testing"
+                sheet.range('F' + str(xlStartNum + Ycell)).value = "Requirements-based test"
             elif testType[Ycell] == DescriptionMsFIT:
                 sheet.range('G' + str(xlStartNum + Ycell)).value = "Error guessing"
-                sheet.range('F' + str(xlStartNum + Ycell)).value = "Fault Injection Test"
+                sheet.range('F' + str(xlStartNum + Ycell)).value = "Fault injection test"
             elif testType[Ycell] == DescriptionMsSTA:
                 sheet.range('G' + str(xlStartNum + Ycell)).value = "Development of positive"
+                sheet.range('F' + str(xlStartNum + Ycell)).value = "Requirements-based test"
             else:
                 sheet.range('G' + str(xlStartNum + Ycell)).value = "Equivalence testing"
             if stubList[i] != '':
                 sheet.range('L' + str(xlStartNum + Ycell)).value = "There is no compilation error\nCreate the stub function\n(" + stubList[i] +")" # stub 넣기
+            else:
+                sheet.range('L' + str(xlStartNum + Ycell)).value = "There is no compilation error"  # stub 넣기
             if testResultState[i] == 0: #OK
                 sheet.range('N' + str(xlStartNum + Ycell)).value = resultOK
             elif testResultState[i] == 1: #NOK
@@ -492,18 +497,18 @@ else:
                     sheet.range('Q' + str(xlStartNum + Ycell)).value = str(SCNPercent[i])
                 else:
                     sheet.range('Q' + str(xlStartNum + Ycell)).value = str(SCNPercent[i]) + '%'                  # 커버리지 state %
-                sheet.range('R' + str(xlStartNum + Ycell)).value = SCNTest[i]      #Number of Tested Statement                              # 커버리지 num test
-                sheet.range('S' + str(xlStartNum + Ycell)).value = SCNTotal[i]     #Number of Total Statement                              # 커버리지 num total
+                sheet.range('R' + str(xlStartNum + Ycell)).value = SCNTest[i]      #Number of Tested Statement 커버리지 num test
+                sheet.range('S' + str(xlStartNum + Ycell)).value = SCNTotal[i]     #Number of Total Statement 커버리지 num total
                 if BCNPercent[i] == 'N/A':#Branch Coverage
                     sheet.range('T' + str(xlStartNum + Ycell)).value = str(BCNPercent[i])
                 else:
                     sheet.range('T' + str(xlStartNum + Ycell)).value = str(BCNPercent[i]) + '%'                  # 커버리지 brench %
-                sheet.range('U' + str(xlStartNum + Ycell)).value = BCNTest[i]   #Number of Tested Branch                                 # 커버리지 num test
-                sheet.range('V' + str(xlStartNum + Ycell)).value = BCNTotal[i]    #Number of Total Branch                               # 커버리지 num total
+                sheet.range('U' + str(xlStartNum + Ycell)).value = BCNTest[i]   #Number of Tested Branch 커버리지 num test
+                sheet.range('V' + str(xlStartNum + Ycell)).value = BCNTotal[i]    #Number of Total Branch 커버리지 num total
             Ycell = Ycell + 1
             print('.', end='')
             p = p + 1
-    #xlbook.sheets['Unit_TC'].name = fileName # 시트 이름 변경
+    #xlbook.sheets['Unit_TC'].name = fileName # 시트 이름변경
     print()
     print("생성완료")
     xlbook.save()
