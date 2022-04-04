@@ -34,8 +34,8 @@ print()
 print("\t┌───────────────────────────────────────────┐")
 print("\t│                                           │")
 print("\t│       Unit TC report generator            │")
-print("\t│       Version 5.1.2                       │")
-print("\t│       Last update date 22/03/15           │")
+print("\t│       Version 5.1.3                       │")
+print("\t│       Last update date 22/04/01           │")
 print("\t│                             [ NANI ]      │")
 print("\t└───────────────────────────────────────────┘\n")
 print()
@@ -482,9 +482,9 @@ else:
             else:
                 sheet.range('G' + str(xlStartNum + Ycell)).value = "Equivalence testing"
             if stubList[i] != '':
-                sheet.range('L' + str(xlStartNum + Ycell)).value = "There is no compilation error\nCreate the stub function\n(" + stubList[i] +")" # stub 넣기
+                sheet.range('L' + str(xlStartNum + Ycell)).value = "No compilation error\nStub : " + stubList[i] # stub 넣기
             else:
-                sheet.range('L' + str(xlStartNum + Ycell)).value = "There is no compilation error"  # stub 넣기
+                sheet.range('L' + str(xlStartNum + Ycell)).value = "No compilation error"  # stub 넣기
             if testResultState[i] == 0: #OK
                 sheet.range('N' + str(xlStartNum + Ycell)).value = resultOK
             elif testResultState[i] == 1: #NOK
