@@ -1,4 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:UdsDesc_ReadDidE500_ReadFaultData_test0,""
-,<input>,g_stTxMsgInfo.u8MsgBuf[0],<expect>,g_stTxMsgInfo.u8MsgBuf[0],g_stTxMsgInfo.u32MsgLen,<output>,g_stTxMsgInfo.u8MsgBuf[0],g_stTxMsgInfo.u32MsgLen
-1,"Create the test case to check statement coverage","64",,"64","0~4294967295",,"64","63"

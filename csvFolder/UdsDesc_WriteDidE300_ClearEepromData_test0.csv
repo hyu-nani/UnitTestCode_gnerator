@@ -1,7 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:UdsDesc_WriteDidE300_ClearEepromData_test0,""
-,<input>,g_stRxMsgInfo.u8MsgBuf[3],g_u32WriteLock,<expect>,g_stTxMsgInfo.u32MsgLen,<output>,g_stTxMsgInfo.u32MsgLen
-1,"Set the value(g_stRxMsgInfo.u8MsgBuf = 0) to verify the equivalence testing of conditional statement(T) of line 1252","0","0",,"0~127",,"3"
-2,"Set the value(g_stRxMsgInfo.u8MsgBuf = 165, g_u32WriteLock = 0) to verify the equivalence testing of conditional statement(T) of line 1261, 1264 ","165","0",,"0~127",,"3"
-3,"Set the value(g_u32WriteLock = 165) to verify the equivalence testing of conditional statement(F) of line 1264","165","165",,"0~127",,"3"
-4,"Set the value(g_u32WriteLock = 164) to verify the equivalence testing of conditional statement(F) of line 1261","164","0",,"0~127",,"3"

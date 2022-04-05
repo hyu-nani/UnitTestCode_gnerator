@@ -1,5 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CanEol_SendEolData_test1,""
-,<input>,CanTxDLC[0],g_stEolProcess.tU8CanEolNextIndex,g_stEolProcess.tU8EolData[0],<expect>,g_stEolProcess.tU8CanEolNextIndex,<output>,g_stEolProcess.tU8CanEolNextIndex
-1,"Set the value (g_stEolProcess.tU8CanEolNextIndex = 4) to verify the equivalence testing of conditional statement(T) of line 309","0","4","0",,"0~201",,"5"
-2,"Set the value (g_stEolProcess.tU8CanEolNextIndex = 95) to verify the equivalence testing for the range of variables","0","95","0",,"0~201",,"95"

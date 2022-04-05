@@ -1,0 +1,8 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:UdsDesc_SecurityAccess_test0,""
+,<input>,g_stRxMsgInfo.u8MsgBuf[1],g_u8SecurityGrant,g_u8Session,g_u32WriteLock,UdsDesc_GetComputeKey,<expect>,g_stTxMsgInfo.u8MsgBuf[0],g_stTxMsgInfo.u32MsgLen,g_u8SecurityGrant,g_u8Session,<output>,g_stTxMsgInfo.u8MsgBuf[0],g_stTxMsgInfo.u32MsgLen,g_u8SecurityGrant,g_u8Session
+1,"Set the value(g_u8Session=1) to verify the boundary of conditional statement(=,T) of line 604 ","1","0","1","0","0",,"127","0~127","0~1","1~3",,"127","3","0","1"
+2,"Set the value(g_u8Session=3, g_stRxMsgInfo.u8MsgBuf=0) to verify the boundary of conditional statement(+2,F) of line 604 ","0","0","3","0","0",,"127","0~127","0~1","1~3",,"127","3","0","3"
+3,"Set the value(g_u8Session=3, g_stRxMsgInfo.u8MsgBuf=1) to verify the boundary of conditional statement(=,T) of line 614 ","1","0","3","0","0",,"64","0~127","0~1","1~3",,"64","6","0","3"
+4,"Set the value(g_u8Session=3, g_stRxMsgInfo.u8MsgBuf=2) to verify the boundary of conditional statement(=,T) of line 630","2","0","3","165","0",,"64","0~127","0~1","1~3",,"64","2","1","3"
+5,"Set the value(g_u8Session=3, g_stRxMsgInfo.u8MsgBuf=2, UdsDesc_GetComputeKey=1) to verify the boundary of conditional statement(+1,F) of line 635","2","0","3","0","1",,"127","0~127","0~1","1~3",,"127","3","0","3"

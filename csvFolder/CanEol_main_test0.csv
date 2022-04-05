@@ -1,7 +1,0 @@
-CodeScroll Unit Tester(Controller Tester) Test Data
-test name:CanEol_main_test0,""
-,<input>,CanIf_GetRx_Indi_TCU_EOL_Saving_Req,g_stEolProcess.tU8EolWrite,g_u8EolAvailivility,<expect>,<output>
-1,"Set the value (g_u8EolAvailivility = 0(false)) to verify boundary of conditional statement(-1,F) of line 125","0","0","0",,
-2,"Set the value (g_u8EolAvailivility = 1(true), CanIf_GetRx_Indi_TCU_EOL_Saving_Req = 0, g_stEolProcess.tU8EolWrite = 0) to verify boundary of conditional statement(=,T) of line 125, 134","0","0","1",,
-3,"Set the value (CanIf_GetRx_Indi_TCU_EOL_Saving_Req = 1(true)) to verify boundary of conditional statement(=,T) of line 129","1","0","1",,
-4,"Set the value (g_stEolProcess.tU8EolWrite = 1, CanIf_GetRx_Indi_TCU_EOL_Saving_Req = 0) to verify boundary of conditional statement(=,T) of line 138","0","1","1",,

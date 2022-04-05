@@ -1,0 +1,4 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:BswHal_GetPhsVolt_test1,""
+,<input>,result_index,<expect>,returnVar,<output>,returnVar
+1,"Set the value(result_index=3) to verify the exception of conditional statement(+1,F) of line 150","3",,"0~32767",,"0"

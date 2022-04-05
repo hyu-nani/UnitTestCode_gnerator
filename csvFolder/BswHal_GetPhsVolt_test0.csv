@@ -1,0 +1,5 @@
+CodeScroll Unit Tester(Controller Tester) Test Data
+test name:BswHal_GetPhsVolt_test0,""
+,<input>,result_index,<expect>,returnVar,<output>,returnVar
+1,"Set the value(result_index=0) to verify the boundary for the range of variables(min)","0",,"0~32767",,"0"
+2,"Set the value(result_index=2) to verify the boundary for the range of variables(max)","2",,"0~32767",,"0"
